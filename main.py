@@ -1,4 +1,4 @@
 from pyngrok import ngrok
 
-tunnel =ngrok.connect('tcp', 8080)
+tunnel =ngrok.connect(8080, 'tcp')
 print(tunnel)
