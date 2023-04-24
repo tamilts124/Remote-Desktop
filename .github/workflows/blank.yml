@@ -25,6 +25,11 @@ jobs:
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
       - uses: actions/checkout@v3
 
+      - name: "Setting up Python"
+        uses: actions/setup-python@v4
+        with:
+          python-version: "3.x"
+
       # Runs a set of commands using the runners shell
       - name: Run a multi-line script
         run: |
@@ -36,6 +41,5 @@ jobs:
             n
             end
             
-            sudo apt install python3
             pip install pyngrok
             python main.py
