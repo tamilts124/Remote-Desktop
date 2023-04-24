@@ -35,7 +35,7 @@ jobs:
         run: |
             sudo apt install tightvncserver
             
-            vncserver <<end
+            vncserver :1 <<end
             12345678
             12345678
             n
@@ -43,3 +43,4 @@ jobs:
             
             pip install pyngrok
             python main.py
+            sleep 1000
