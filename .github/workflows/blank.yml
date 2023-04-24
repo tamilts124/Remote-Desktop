@@ -52,4 +52,4 @@ jobs:
             #sudo vncserver --help
             python main.py
             
-            sleep 1000
+            sleep 10000
