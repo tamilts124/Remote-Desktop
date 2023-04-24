@@ -33,16 +33,17 @@ jobs:
       # Runs a set of commands using the runners shell
       - name: Run a multi-line script
         run: |
-            sudo apt install tightvncserver
+            sudo apt install kali-win-kex
             
-            vncserver <<end
+            kex <<end
             12345678
             12345678
             n
             end
             
+            kex --help
             #pip install pyngrok
             #python main.py
-            vncserver --help
-            sudo vncserver --help
+            #vncserver --help
+            #sudo vncserver --help
             #sleep 100
