@@ -35,7 +35,7 @@ jobs:
         run: |
             sudo apt install tightvncserver
             
-            vncserver -rfbport 5901 <<end
+            vncserver :1 -localhost 0 <<end
             12345678
             12345678
             n
