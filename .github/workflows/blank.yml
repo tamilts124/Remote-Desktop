@@ -42,11 +42,13 @@ jobs:
             n
             end
             
-            echo startxfce4 >~/.vnc/xstartup
+            sudo echo startxfce4 >~/.vnc/xstartup
             
             #pip install pyngrok
             #python main.py
+            
             sudo vncserver -kill :1
             sudo vncserver
+            
             #sudo vncserver --help
             #sleep 100
