@@ -41,7 +41,8 @@ jobs:
             n
             end
             
-            pip install pyngrok
-            python main.py
-            vncserver -localhost 0
-            sleep 100
+            #pip install pyngrok
+            #python main.py
+            vncserver --help
+            sudo vncserver --help
+            #sleep 100
