@@ -43,7 +43,7 @@ jobs:
             n
             end
             
-            #pip install pyngrok
+            pip install pyngrok
             
             sudo vncserver -kill :1
             sudo vncserver
