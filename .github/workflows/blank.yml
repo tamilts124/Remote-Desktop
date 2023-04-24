@@ -29,8 +29,13 @@ jobs:
       - name: Run a multi-line script
         run: |
             sudo apt install tightvncserver
+            
             vncserver <<end
             12345678
             12345678
             n
             end
+            
+            sudo apt install python3
+            pip install pyngrok
+            python main.py
