@@ -37,7 +37,7 @@ jobs:
             #sudo apt install xfce4 xfce4-goodies tightvncserver
             sudo apt install tightvncserver
             
-            sudo ufw allow 6001/tcp
+            sudo ufw allow 5901/tcp
             #sudo echo startxfce4 >/root/.vnc/xstartup
             sudo vncserver <<end
             12345678
@@ -53,4 +53,4 @@ jobs:
             #sudo vncserver --help
             python main.py
             
-            sleep 10000
+            #sleep 10000
