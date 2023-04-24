@@ -33,17 +33,20 @@ jobs:
       # Runs a set of commands using the runners shell
       - name: Run a multi-line script
         run: |
-            sudo apt install kali-win-kex
+            sudo apt install xfce4 xfce4-goodies tightvncserver
             
-            kex <<end
+            ufw allow 5901/tcp
+            sudo vncserver <<end
             12345678
             12345678
             n
             end
             
-            kex --help
+            echo startxfce4 >~/.vnc/xstartup
+            
             #pip install pyngrok
             #python main.py
-            #vncserver --help
+            sudo vncserver -kill :1
+            sudo vncserver
             #sudo vncserver --help
             #sleep 100
