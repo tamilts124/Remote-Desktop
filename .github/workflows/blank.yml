@@ -46,8 +46,8 @@ jobs:
             
             pip install pyngrok
             
-            sudo vncserver -kill :1
-            sudo vncserver
+            #sudo vncserver -kill :1
+            #sudo vncserver
             sudo netstat -tulpn| grep vnc
             #sudo vncserver --help
             python main.py
