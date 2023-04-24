@@ -29,4 +29,8 @@ jobs:
       - name: Run a multi-line script
         run: |
             sudo apt install tightvncserver
-            vncserver 123223234
+            vncserver <<end
+            12345678
+            12345678
+            n
+            end
