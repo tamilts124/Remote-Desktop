@@ -42,7 +42,7 @@ jobs:
             n
             end
             
-            sudo echo startxfce4 >~/.vnc/xstartup
+            echo startxfce4 >~/.vnc/xstartup
             
             #pip install pyngrok
             #python main.py
