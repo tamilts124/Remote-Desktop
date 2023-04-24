@@ -35,7 +35,7 @@ jobs:
         run: |
             sudo apt install tightvncserver
             
-            vncserver -localhost no <<end
+            vncserver <<end
             12345678
             12345678
             n
