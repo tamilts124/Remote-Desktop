@@ -1,4 +1,4 @@
-import requests
+import requests, os
 from bs4 import BeautifulSoup
 import datetime as dt
 from pyngrok import ngrok
