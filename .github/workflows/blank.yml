@@ -39,7 +39,7 @@ jobs:
             sudo apt install xfce4 xfce4-goodies tightvncserver
             
             sudo ufw allow 5901/tcp
-            sudo vncserver <<end
+            sudo vncserver -geometry 1558x714 <<end
             12345678
             12345678
             n
