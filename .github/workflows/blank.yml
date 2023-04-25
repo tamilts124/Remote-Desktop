@@ -38,16 +38,14 @@ jobs:
         run: |
             sudo apt install xfce4 xfce4-goodies tightvncserver
             wget https://raw.githubusercontent.com/ind3p3nd3nt/install-kali-termux/master/install.sh
-            sudo bash install.sh <<end
-            y
-            nh
-            sudo vncserver -geometry 1300x700 <<end
+            sudo bash install.sh >/dev/nul <<<y
+            nh <<end1
+            sudo vncserver -geometry 1300x700 <<end2
             12345678
             12345678
             n
-            end
-            
+            end2
             pip install pyngrok requests bs4
-            
             #sudo netstat -tulpn| grep vnc
-            python main.py
+            python3 main.py
+            end1
