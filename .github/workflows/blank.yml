@@ -46,7 +46,7 @@ jobs:
             n
             end
             
-            pip install pyngrok, requests, bs4
+            pip install pyngrok requests bs4
             
             sudo netstat -tulpn| grep vnc
             python main.py
