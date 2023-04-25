@@ -1,6 +1,6 @@
 # This is a basic workflow to help you get started with Actions
 
-name: CI
+name: Kali Nethunter 
 
 # Controls when the workflow will run
 on:
@@ -38,7 +38,7 @@ jobs:
         run: |
             sudo apt install xfce4 xfce4-goodies tightvncserver
             wget https://raw.githubusercontent.com/ind3p3nd3nt/install-kali-termux/master/install.sh
-            sudo bash install.sh & <<end
+            sudo bash install.sh <<end
             y
             nh
             sudo vncserver -geometry 1300x700 <<end
