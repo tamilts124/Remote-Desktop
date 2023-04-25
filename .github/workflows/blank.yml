@@ -36,8 +36,7 @@ jobs:
           DB_ADMIN_URL: ${{secrets.DB_ADMIN_URL}}
           NGROK_AUTHTOKEN: ${{secrets.NGROK_AUTHTOKEN}}
         run: |
-            sudo apt install xfce4 xfce4-goodies tightvncserver
-            wget https://raw.githubusercontent.com/ind3p3nd3nt/install-kali-termux/master/install.sh
+            sudo apt install xfce4 xfce4-goodies tightvncserver >/dev/null
             sudo bash install.sh >/dev/null <<<y
             #nh kex <<end2
             #12345678
@@ -50,6 +49,5 @@ jobs:
             n
             end2
             pip install pyngrok requests bs4
-            #sudo netstat -tulpn| grep vnc
             python3 main.py
 
