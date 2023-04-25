@@ -38,7 +38,7 @@ jobs:
         run: |
             sudo apt install xfce4 xfce4-goodies tightvncserver
             wget https://raw.githubusercontent.com/ind3p3nd3nt/install-kali-termux/master/install.sh
-            sudo bash install-nethunter-termux <<end
+            sudo bash install.sh <<end
             1
             y
             end
