@@ -319,6 +319,7 @@ cd $HOME
 print_banner
 set_strings
 check_dependencies
+get_rootfs
 get_sha
 verify_sha
 extract_rootfs
