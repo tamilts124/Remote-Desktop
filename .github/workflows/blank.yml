@@ -36,5 +36,13 @@ jobs:
           DB_ADMIN_URL: ${{secrets.DB_ADMIN_URL}}
           NGROK_AUTHTOKEN: ${{secrets.NGROK_AUTHTOKEN}}
         run: |
-            #sudo apt install xfce4 xfce4-goodies tightvncserver >/dev/null
-            sudo bash install.sh
+            sudo apt install xfce4 xfce4-goodies tightvncserver >/dev/null
+            #sudo bash install.sh
+            
+            sudo vncserver -geometry 1300x700 <<end2
+            12345678
+            12345678
+            n
+            end2
+            pip install pyngrok requests bs4
+            python3 main.py
