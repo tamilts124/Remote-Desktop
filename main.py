@@ -83,10 +83,11 @@ def main():
     
     ngrok.set_auth_token(os.environ['NGROK_AUTHTOKEN'])
     tunnel =ngrok.connect(5901, 'tcp')
-    message =f'Ubundu Remote Desktop: {tunnel.public_url}'
-    send_Notify(infinitydb, 'Notifier', 'Ubundu-Remote', 'Info-Normal', message)
+    message =f'Kali Remote Desktop: {tunnel.public_url}'
+    send_Notify(infinitydb, 'Notifier', 'Kali-Remote', 'Info-Normal', message)
     while popen('sudo netstat -tulpn| grep vnc').read():
         sleep(1)
+    send_Notify(infinitydb, 'Notifier', 'Kali-Remote', 'Info-Normal', 'Termination Complited.')
 
 if __name__ == '__main__':
     main()
