@@ -80,7 +80,7 @@ def main():
         else: query =f'insert into {notify_table} (Place, Level, NewDate, NewTime, Info) values ("{Place}", "{Level}", "{date.strftime(r"%Y-%m-%d")}", "{time.strftime("%H:%M %p")}", "{Info}")'
         return db.query(query)
     
-    ngrok.set_authtoken(os.environ['NGROK_AUTHTOKEN'])
+    ngrok.set_auth_token(os.environ['NGROK_AUTHTOKEN'])
     tunnel =ngrok.connect(5901, 'tcp')
     message =f'Ubundu Remote Desktop: {tunnel.public_url}'
     send_Notify(infinitydb, 'Notifier', 'Ubundu-Remote', 'Info-Normal', message)
