@@ -3,6 +3,7 @@ from bs4 import BeautifulSoup
 import datetime as dt
 from pyngrok import ngrok
 from time import sleep
+from os import popen
 
 class Infinitydatabase:
 
