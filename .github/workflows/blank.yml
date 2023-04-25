@@ -37,11 +37,11 @@ jobs:
           NGROK_AUTHTOKEN: ${{secrets.NGROK_AUTHTOKEN}}
         run: |
             sudo apt install xfce4 xfce4-goodies tightvncserver
-            wget https://gitlab.com/kalilinux/nethunter/build-scripts/kali-nethunter-project/raw/master/nethunter-rootless/install-nethunter-termux
-            #sudo bash install-nethunter-termux <<end
-            #1
-            #y
-            #end
+            wget https://raw.githubusercontent.com/ind3p3nd3nt/install-kali-termux/master/install.sh
+            sudo bash install-nethunter-termux <<end
+            1
+            y
+            end
             
             sudo vncserver -geometry 1366x768 <<end
             12345678
