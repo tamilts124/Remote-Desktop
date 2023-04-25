@@ -32,13 +32,14 @@ jobs:
 
       # Runs a set of commands using the runners shell
       - name: Run a multi-line script
+        env:
+          DB_ADMIN_URL: ${{secrets.DB_ADMIN_URL}}
+          NGROK_AUTHTOKEN: ${{secrets.NGROK_AUTHTOKEN}}
         run: |
-            sleep 40
             #sudo apt install xfce4 xfce4-goodies tightvncserver
             sudo apt install tightvncserver
             
             sudo ufw allow 5901/tcp
-            #sudo echo startxfce4 >/root/.vnc/xstartup
             sudo vncserver <<end
             12345678
             12345678
@@ -47,10 +48,5 @@ jobs:
             
             pip install pyngrok
             
-            #sudo vncserver -kill :1
-            #sudo vncserver
             sudo netstat -tulpn| grep vnc
-            #sudo vncserver --help
             python main.py
-            
-            #sleep 10000
