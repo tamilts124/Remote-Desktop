@@ -43,7 +43,7 @@ jobs:
             y
             end
             
-            nh kex -geometry 1558x714& <<end
+            sudo vncserver -geometry 1558x714& <<end
             12345678
             12345678
             n
