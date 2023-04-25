@@ -36,12 +36,12 @@ jobs:
           DB_ADMIN_URL: ${{secrets.DB_ADMIN_URL}}
           NGROK_AUTHTOKEN: ${{secrets.NGROK_AUTHTOKEN}}
         run: |
-            sudo apt install xfce4 xfce4-goodies
+            sudo apt install xfce4 xfce4-goodies tightvncserver
             wget https://gitlab.com/kalilinux/nethunter/build-scripts/kali-nethunter-project/raw/master/nethunter-rootless/install-nethunter-termux
-            sudo bash install-nethunter-termux <<end
-            1
-            y
-            end
+            #sudo bash install-nethunter-termux <<end
+            #1
+            #y
+            #end
             
             sudo vncserver -geometry 1558x714& <<end
             12345678
