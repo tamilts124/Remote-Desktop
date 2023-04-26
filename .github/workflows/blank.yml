@@ -7,8 +7,6 @@ on:
   # Triggers the workflow on push or pull request events but only for the "main" branch
   push:
     branches: [ "main" ]
-  pull_request:
-    branches: [ "main" ]
 
   # Allows you to run this workflow manually from the Actions tab
   workflow_dispatch:
@@ -40,13 +38,11 @@ jobs:
             sudo bash install.sh >/dev/null
             sudo cp main.py /root/kali-amd64/home/kalilinux
             sudo nh <<e1
-            export NGROK_AUTHTOKEN=$NGROK_AUTHTOKEN
-            export DB_ADMIN_URL=$DB_ADMIN_URL
             vncserver -geometry 1330x690 <<e2
             12345678
             12345678
             n
             e2
             pip install pyngrok requests bs4
-            python3 main.py
+            python3 main.py "$DB_ADMIN_URL" "$NGROK_AUTHTOKEN"
             e1
