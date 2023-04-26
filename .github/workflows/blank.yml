@@ -47,6 +47,6 @@ jobs:
             12345678
             n
             e2
+            e1
             pip install pyngrok requests bs4
             python3 main.py
-            e1
