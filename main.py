@@ -85,8 +85,6 @@ def main():
     tunnel =ngrok.connect(5901, 'tcp')
     message =f'Kali Remote Desktop: {tunnel.public_url}'
     send_Notify(infinitydb, 'Notifier', 'Kali-Remote', 'Info-Normal', message)
-    while not popen('sudo netstat -tulpn| grep vnc').read():
-        sleep(1)
     while popen('sudo netstat -tulpn| grep vnc').read():
         sleep(1)
     send_Notify(infinitydb, 'Notifier', 'Kali-Remote', 'Info-Normal', 'Termination Complited.')
