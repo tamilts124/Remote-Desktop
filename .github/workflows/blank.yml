@@ -40,6 +40,10 @@ jobs:
             wget https://raw.githubusercontent.com/ind3p3nd3nt/install-kali-termux/master/install.sh
             #bash install.sh.1 >/dev/null
             
-            vncserver -geometry 1300x680 -PasswordFile ./passwd
+            vncserver -geometry 1300x680 <<e
+            12345678
+            12345678
+            n
+            e
             pip install pyngrok requests bs4
             python3 main.py
