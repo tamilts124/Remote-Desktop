@@ -39,9 +39,6 @@ jobs:
             sudo apt install xfce4 xfce4-goodies tightvncserver >/dev/null
             sudo bash install.sh >/dev/null
             sudo nh <<e1
-            pwd
-            ls
-            whoami
             vncserver -geometry 1330x690 <<e2
             12345678
             12345678
