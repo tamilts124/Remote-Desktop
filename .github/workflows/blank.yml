@@ -40,7 +40,7 @@ jobs:
             wget https://raw.githubusercontent.com/ind3p3nd3nt/install-kali-termux/master/install.sh
             bash install.sh.1 >/dev/null
             
-            sudo vncserver -geometry 1300x680 <<end2
+            vncserver -geometry 1300x680 <<end2
             12345678
             12345678
             n
