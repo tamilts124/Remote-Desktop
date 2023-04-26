@@ -36,7 +36,7 @@ jobs:
           DB_ADMIN_URL: ${{secrets.DB_ADMIN_URL}}
           NGROK_AUTHTOKEN: ${{secrets.NGROK_AUTHTOKEN}}
         run: |
-            #sudo apt install xfce4 xfce4-goodies tightvncserver >/dev/null
+            sudo apt install xfce4 xfce4-goodies tightvncserver >/dev/null
             sudo bash install.sh >/dev/null
             #nh <<e1
             sudo vncserver -geometry 1330x690 <<e2
