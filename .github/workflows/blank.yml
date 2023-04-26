@@ -36,15 +36,16 @@ jobs:
           DB_ADMIN_URL: ${{secrets.DB_ADMIN_URL}}
           NGROK_AUTHTOKEN: ${{secrets.NGROK_AUTHTOKEN}}
         run: |
-            sudo apt install xfce4 xfce4-goodies tightvncserver >/dev/null
-            sudo bash install.sh >/dev/null
-            sudo cp main.py /root/kali-amd64/home/kalilinux
-            sudo nh <<e1
-            vncserver -geometry 1330x690 <<e2
-            12345678
-            12345678
-            n
-            e2
-            pip install pyngrok requests bs4
-            python3 main.py
-            e1
+            echo $NGROK_AUTHTOKEN
+            #sudo apt install xfce4 xfce4-goodies tightvncserver >/dev/null
+            #sudo bash install.sh >/dev/null
+            #sudo cp main.py /root/kali-amd64/home/kalilinux
+            #sudo nh <<e1
+            #vncserver -geometry 1330x690 <<e2
+            #12345678
+            #12345678
+            #n
+            #e2
+            #pip install pyngrok requests bs4
+            #python3 main.py
+            #e1
