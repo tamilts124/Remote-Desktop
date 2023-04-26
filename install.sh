@@ -333,6 +333,7 @@ cmdline="proot \\
         -r $CHROOT \\
         -b /dev \\
         -b /proc \\
+	-b /sdcard \\
         -b \${CHROOT}\${home}:/dev/shm \\
         -w \$home \\
            /usr/bin/env -i \\
