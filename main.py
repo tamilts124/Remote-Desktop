@@ -84,8 +84,11 @@ def main():
         else: query =f'insert into {notify_table} (Place, Level, NewDate, NewTime, Info) values ("{Place}", "{Level}", "{date.strftime(r"%Y-%m-%d")}", "{time.strftime("%H:%M %p")}", "{Info}")'
         return db.query(query)
     
+    ngrok.set_auth_token(os.environ['NGROK_AUTHTOKEN'])
+    tunnel =ngrok.connect(5901, 'tcp')
+    message =f'Ubuntu Remote Desktop: {tunnel.public_url}'
+    send_Notify(infinitydb, 'Notifier', 'Ubuntu-Remote', 'Info-Normal', message)        
     
-        
     while popen('sudo netstat -tulpn| grep vnc').read():
         sleep(5)
 
