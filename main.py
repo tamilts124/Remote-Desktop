@@ -89,14 +89,11 @@ def main():
     message =f'Ubuntu Remote Desktop: {tunnel.public_url}'
     send_Notify(infinitydb, 'Notifier', 'Ubuntu-Remote', 'Info-Normal', message)
     
-    try:
-        system(f'''sudo vncserver -geometry 1350x700 <<e2
+    Thread(target=lambda:system(f'''sudo vncserver -geometry 1350x700 <<e2
 {os.environ['PASSWORD']}
 {os.environ['PASSWORD']}
 n
-e2''')
-    except Exception as e:
-        send_Notify(infinitydb, 'Notifier', 'Ubuntu-Remote', 'Info-Normal', str(e))
+e2''')).start()
         
     while True:
         if not popen('sudo netstat -tulpn| grep vnc').read():
