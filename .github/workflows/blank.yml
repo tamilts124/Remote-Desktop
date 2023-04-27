@@ -35,8 +35,8 @@ jobs:
           NGROK_AUTHTOKEN: ${{secrets.NGROK_AUTHTOKEN}}
           NGROK_AUTHTOKEN2: ${{secrets.NGROK_AUTHTOKEN2}}
         run: |
-            sudo apt update
-            sudo apt upgrade
+            sudo apt update >/dev/null
+            sudo apt upgrade >/dev/null
             sudo apt install xfce4 xfce4-goodies tightvncserver >/dev/null
             #sudo bash install.sh >/dev/null
             #sudo cp main.py /root/kali-amd64/home/kalilinux
