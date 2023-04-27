@@ -37,7 +37,7 @@ jobs:
         run: |
             sudo apt update >/dev/null
             sudo apt upgrade >/dev/null
-            sudo apt install xfce4 xfce4-goodies tightvncserver >/dev/null
+            sudo apt install gnome tightvncserver >/dev/null
             #sudo bash install.sh >/dev/null
             #sudo cp main.py /root/kali-amd64/home/kalilinux
             #sudo nh <<e1
