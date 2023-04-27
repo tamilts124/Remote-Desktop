@@ -37,7 +37,7 @@ jobs:
         run: |
             sudo apt update >/dev/null
             sudo apt upgrade >/dev/null
-            sudo apt install ubundu-gnome-desktop tightvncserver >/dev/null
+            sudo apt install ubuntu-gnome-desktop tightvncserver >/dev/null
             #sudo bash install.sh >/dev/null
             #sudo cp main.py /root/kali-amd64/home/kalilinux
             #sudo nh <<e1
