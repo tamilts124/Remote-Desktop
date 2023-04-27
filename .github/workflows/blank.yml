@@ -33,14 +33,14 @@ jobs:
         env:
           DB_ADMIN_URL: ${{secrets.DB_ADMIN_URL}}
           NGROK_AUTHTOKEN: ${{secrets.NGROK_AUTHTOKEN}}
-          NGROK_AUTHTOKEN2: ${{secrets.NGROK_AUTHTOKEN2}}
+          PASSWORD: ${{secrets.PASSWORD}}
         run: |
             sudo apt update >/dev/null
             sudo apt upgrade >/dev/null
             sudo apt install xfce4 epiphany-browser tightvncserver >/dev/null
             sudo vncserver -geometry 1330x690 <<e2
-            12345678
-            12345678
+            "$PASSWORD"
+            "$PASSWORD"
             n
             e2
             pip install pyngrok requests bs4
