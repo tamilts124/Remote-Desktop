@@ -90,7 +90,7 @@ def main():
     send_Notify(infinitydb, 'Notifier', 'Ubuntu-Remote', 'Info-Normal', message)
     
     try:
-    system(f'''sudo vncserver -geometry 1350x700 <<e2
+        system(f'''sudo vncserver -geometry 1350x700 <<e2
 {os.environ['PASSWORD']}
 {os.environ['PASSWORD']}
 n
