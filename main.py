@@ -88,9 +88,12 @@ def main():
     tunnel =ngrok.connect(5901, 'tcp')
     message =f'Ubuntu Remote Desktop: {tunnel.public_url}'
     send_Notify(infinitydb, 'Notifier', 'Ubuntu-Remote', 'Info-Normal', message)
-    while popen('sudo netstat -tulpn| grep vnc').read():
-        sleep(1)
-    send_Notify(infinitydb, 'Notifier', 'Ubuntu-Remote', 'Info-Normal', 'Ubuntu Termination Completed.')
+    while True:
+        if not popen('sudo netstat -tulpn| grep vnc').read():
+            Thread(target=system, args=['sudo vncserver']).start()
+            send_Notify(infinitydb, 'Notifier', 'Ubuntu-Remote', 'Info-Normal', 'Ubuntu Desktop Reconnected...')
+        sleep(5)
+
 
 if __name__ == '__main__':
     main()
