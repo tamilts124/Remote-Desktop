@@ -38,5 +38,10 @@ jobs:
             #sudo apt update >/dev/null
             #sudo apt upgrade >/dev/null
             sudo apt install xfce4 epiphany-browser terminator tightvncserver >/dev/null
+            sudo vncserver -geometry 1337x768 <<e2
+            $PASSWORD
+            $PASSWORD
+            n
+            e2
             pip install pyngrok requests bs4
             python main.py
