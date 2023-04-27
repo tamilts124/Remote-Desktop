@@ -3,6 +3,7 @@ import datetime as dt
 from pyngrok import ngrok
 from time import sleep
 from os import popen
+from Infinitydatabase import Infinitydatabase
     
 def main():
     infinitydb =Infinitydatabase(sys.argv[1])
