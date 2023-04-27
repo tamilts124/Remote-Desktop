@@ -36,17 +36,12 @@ jobs:
           NGROK_AUTHTOKEN2: ${{secrets.NGROK_AUTHTOKEN2}}
         run: |
             sudo apt update >/dev/null
-            #sudo apt upgrade >/dev/null
-            sudo apt install xfce4 xfce4-goodies epiphany-browser tightvncserver >/dev/null
-            sudo bash install.sh >/dev/null
-            #sudo cp main.py /root/kali-amd64/home/kalilinux
-            #sudo nh <<e1
+            sudo apt upgrade >/dev/null
+            sudo apt install xfce4 epiphany-browser tightvncserver >/dev/null
             sudo vncserver -geometry 1330x690 <<e2
             12345678
             12345678
             n
             e2
             pip install pyngrok requests bs4
-            
-            python3 main.py "$DB_ADMIN_URL" "$NGROK_AUTHTOKEN" "$NGROK_AUTHTOKEN2"
-            #e1
+            python main.py
