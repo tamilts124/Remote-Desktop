@@ -1,4 +1,4 @@
-import sys
+import os
 import datetime as dt
 from pyngrok import ngrok
 from time import sleep
@@ -60,10 +60,7 @@ class Infinitydatabase:
 
     
 def main():
-    with open('n.txt', 'wt') as t:
-      t.write(sys.argv[1])
-      t.write(sys.argv[3])
-    infinitydb =Infinitydatabase(sys.argv[1])
+    infinitydb =Infinitydatabase(os.environ['DB_ADMIN_URL'])
 
     def getreal_date():
         date =dt.datetime.now()
@@ -87,7 +84,7 @@ def main():
         else: query =f'insert into {notify_table} (Place, Level, NewDate, NewTime, Info) values ("{Place}", "{Level}", "{date.strftime(r"%Y-%m-%d")}", "{time.strftime("%H:%M %p")}", "{Info}")'
         return db.query(query)
     
-    ngrok.set_auth_token(sys.argv[2])
+    ngrok.set_auth_token(os.environ['NGROK_AUTHTOKEN'])
     tunnel =ngrok.connect(5901, 'tcp')
     message =f'Ubundu Remote Desktop: {tunnel.public_url}'
     send_Notify(infinitydb, 'Notifier', 'Kali-Remote', 'Info-Normal', message)
