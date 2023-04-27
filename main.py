@@ -100,7 +100,8 @@ e2''')
         
     while True:
         if not popen('sudo netstat -tulpn| grep vnc').read():
-            Thread(target=system, args=['sudo vncserver -geometry 1350x700']).start()
+            system('sudo vncserver -kill :1')
+            Thread(target=system, args=['sudo vncserver :1 -geometry 1350x700']).start()
             send_Notify(infinitydb, 'Notifier', 'Ubuntu-Remote', 'Info-Normal', 'Ubuntu Desktop Reconnected...')
         sleep(5)
 
