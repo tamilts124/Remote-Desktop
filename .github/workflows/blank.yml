@@ -1,6 +1,6 @@
 # This is a basic workflow to help you get started with Actions
 
-name: Kali Nethunter 
+name: Ubuntu
 
 # Controls when the workflow will run
 on:
@@ -35,8 +35,8 @@ jobs:
           NGROK_AUTHTOKEN: ${{secrets.NGROK_AUTHTOKEN}}
           PASSWORD: ${{secrets.PASSWORD}}
         run: |
-            sudo apt update >/dev/null
-            sudo apt upgrade >/dev/null
+            #sudo apt update >/dev/null
+            #sudo apt upgrade >/dev/null
             sudo apt install xfce4 epiphany-browser terminator tightvncserver >/dev/null
             pip install pyngrok requests bs4
             python main.py
