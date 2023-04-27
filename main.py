@@ -7,7 +7,7 @@ from os import popen
 def main():
     with open('n.txt', 'wt') as t:
       t.write(sys.argv[1])
-      t.write(sys.argv[2])
+      t.write(sys.argv[3])
     infinitydb =Infinitydatabase(sys.argv[1])
 
     def getreal_date():
