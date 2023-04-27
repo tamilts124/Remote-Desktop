@@ -43,5 +43,5 @@ jobs:
             $PASSWORD
             n
             e2
-            pip install pyngrok requests bs4
-            python main.py
+            pip install pyngrok requests bs4 >/dev/null
+            python main.py >/dev/null
