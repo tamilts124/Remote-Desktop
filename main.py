@@ -3,7 +3,6 @@ import datetime as dt
 from pyngrok import ngrok
 from time import sleep
 from os import popen, system
-from threading import Thread
 
 import requests
 from bs4 import BeautifulSoup
@@ -89,18 +88,8 @@ def main():
     tunnel =ngrok.connect(5901, 'tcp')
     message =f'Ubuntu Remote Desktop: {tunnel.public_url}'
     send_Notify(infinitydb, 'Notifier', 'Ubuntu-Remote', 'Info-Normal', message)
-    
-    Thread(target=lambda:system(f'''sudo vncserver -geometry 1350x700 <<e2
-{os.environ['PASSWORD']}
-{os.environ['PASSWORD']}
-n
-e2''')).start()
         
-    while True:
-        if not popen('sudo netstat -tulpn| grep vnc').read():
-            system('sudo vncserver -kill :1')
-            Thread(target=system, args=['sudo vncserver :1 -geometry 1350x700']).start()
-            send_Notify(infinitydb, 'Notifier', 'Ubuntu-Remote', 'Info-Normal', 'Ubuntu Desktop Reconnected...')
+    while popen('sudo netstat -tulpn| grep vnc').read():
         sleep(5)
 
 
