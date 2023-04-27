@@ -37,8 +37,8 @@ jobs:
         run: |
             sudo apt update >/dev/null
             sudo apt upgrade >/dev/null
-            sudo apt install xfce4 epiphany-browser tightvncserver >/dev/null
-            sudo vncserver -geometry 1330x690 <<e2
+            sudo apt install xfce4 epiphany-browser terminator tightvncserver >/dev/null
+            sudo vncserver -geometry 1350x700 <<e2
             $PASSWORD
             $PASSWORD
             n
