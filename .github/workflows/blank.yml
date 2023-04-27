@@ -37,7 +37,7 @@ jobs:
         run: |
             #sudo apt update >/dev/null
             #sudo apt upgrade >/dev/null
-            sudo apt install xfce4 epiphany-browser terminator tightvncserver >/dev/null
+            sudo apt install xfce4 epiphany-browser terminator tigervnc-common tigervnc-standalone-server tigervnc-tools >/dev/null
             sudo vncserver -geometry 1337x768 <<e2
             $PASSWORD
             $PASSWORD
