@@ -44,4 +44,8 @@ jobs:
             n
             e2
             pip install pyngrok requests bs4 >/dev/null
+            sudo snap install ngrok
+            ngrok authtoken $NGROK_AUTHTOKEN
+            mkdir /home/runner/.config/ngrok/
+            cp /home/runner/.ngrok2/ngrok.yml /home/runner/.config/ngrok/ngrok.yml
             python main.py >/dev/null
