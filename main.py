@@ -45,8 +45,8 @@ def shareCAS(clienthost, clientport, serverhost, serverport):
     cs, ss =socket(), socket()
     ss.connect((serverhost, serverport))
     cs.connect((clienthost, clientport))
-    ss.settimeout(60.0)
-    cs.settimeout(60.0)
+    ss.settimeout(30.0)
+    cs.settimeout(30.0)
     process1 =Process(target=listion, args=[cs, ss])
     process2 =Process(target=listion, args=[ss, cs])
     return process1, process2
