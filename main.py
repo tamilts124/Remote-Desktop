@@ -9,7 +9,6 @@ from Infinitydatabase import Infinitydatabase
 if len(sys.argv)<2: print('Local Port Is Required..'); exit(1)
 clienthost, clientport ='localhost', int(sys.argv[1])
 dbadminurl ='' if not len(sys.argv)==3 else sys.argv[2]
-processes =[]
 
 def getreal_date():
     date =dt.datetime.now()
@@ -39,8 +38,8 @@ def listion(cs:socket, conn:socket):
             data =conn.recv(1024)
             if data: cs.sendall(data)
         except Exception as e:
-            print(e)
             send_Notify(infdb, 'Notifier', 'CS-Internediator', 'Error-Unknown', str(e))
+            print(e); break
 
 def shareCAS(clienthost, clientport, serverhost, serverport):
     cs, ss =socket(), socket()
@@ -48,8 +47,7 @@ def shareCAS(clienthost, clientport, serverhost, serverport):
     cs.connect((clienthost, clientport))
     process1 =Process(target=listion, args=[cs, ss])
     process2 =Process(target=listion, args=[ss, cs])
-    processes.append(process1)
-    processes.append(process2)
+    return process1, process2
 
 def createMessage(infdb:Infinitydatabase, receiptno):
     query =f'delete from shareCAS where receipt={receiptno}'
@@ -74,11 +72,13 @@ if __name__ == '__main__':
     while True:
         try:
             serverhost, serverport =reveiveMessage(infdb, receiptno)
-            shareCAS(clienthost, clientport, serverhost, serverport)
-            for process in processes: process.start()
-            while True: sleep(5)
+            process1, process2 =shareCAS(clienthost, clientport, serverhost, serverport)
+            process1.start()
+            process2.start()
+            while True:
+                if not process1.is_alive() and not process2.is_alive(): break
+                elif not process1.is_alive(): process2.kill(); break
+                elif not process2.is_alive(): process1.kill(); break
+                sleep(10)
         except Exception as e:
-            for process in processes:
-                if process.is_alive(): process.stop()
-            processes.clear()
             print(e); sleep(10)
