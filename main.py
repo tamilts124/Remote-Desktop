@@ -56,7 +56,7 @@ def shareCAS(clienthost, clientport, serverhost, serverport):
 def createMessage(infdb:Infinitydatabase, receiptno):
     query =f'delete from shareCAS where receipt={receiptno}'
     infdb.query(query)
-    message =f'shareCAS Waiting For Response Through The Receipt NO: {receiptno}'
+    message =f'shareCAS Waiting For Response Through The Receipt NO (Ubuntu-REMOTE): {receiptno}'
     send_Notify(infdb, 'Notifier', 'CS-Internediator', 'Info-High', message)
 
 def reveiveMessage(infdb:Infinitydatabase, receiptno):
