@@ -6,6 +6,8 @@ import datetime as dt
 from time import sleep
 from Infinitydatabase import Infinitydatabase
 
+timeout =1296000
+
 if len(sys.argv)<2: print('Local Port Is Required..'); exit(1)
 clienthost, clientport ='localhost', int(sys.argv[1])
 dbadminurl ='' if not len(sys.argv)==3 else sys.argv[2]
@@ -45,8 +47,8 @@ def shareCAS(clienthost, clientport, serverhost, serverport):
     cs, ss =socket(), socket()
     ss.connect((serverhost, serverport))
     cs.connect((clienthost, clientport))
-    ss.settimeout(30.0)
-    cs.settimeout(30.0)
+    ss.settimeout(timeout)
+    cs.settimeout(timeout)
     process1 =Process(target=listion, args=[cs, ss])
     process2 =Process(target=listion, args=[ss, cs])
     return process1, process2
@@ -54,7 +56,7 @@ def shareCAS(clienthost, clientport, serverhost, serverport):
 def createMessage(infdb:Infinitydatabase, receiptno):
     query =f'delete from shareCAS where receipt={receiptno}'
     infdb.query(query)
-    message =f'shareCAS Waiting For Response Through The Receipt NO (Ubuntu-REMOTE): {receiptno}'
+    message =f'shareCAS Waiting For Response Through The Receipt NO: {receiptno}'
     send_Notify(infdb, 'Notifier', 'CS-Internediator', 'Info-High', message)
 
 def reveiveMessage(infdb:Infinitydatabase, receiptno):
@@ -64,6 +66,8 @@ def reveiveMessage(infdb:Infinitydatabase, receiptno):
         if table and table.get('row'):
             host, port =table['row'][0]
             port =int(port)
+            query =f'delete from shareCAS where receipt={receiptno}'
+            infdb.query(query)
             return host, port
         sleep(5)
 
@@ -75,12 +79,6 @@ if __name__ == '__main__':
         try:
             serverhost, serverport =reveiveMessage(infdb, receiptno)
             process1, process2 =shareCAS(clienthost, clientport, serverhost, serverport)
-            process1.start()
-            process2.start()
-            while True:
-                if not process1.is_alive() and not process2.is_alive(): break
-                elif not process1.is_alive(): process2.kill(); break
-                elif not process2.is_alive(): process1.kill(); break
-                sleep(10)
+            process1.start(); process2.start()
         except Exception as e:
             print(e); sleep(10)
