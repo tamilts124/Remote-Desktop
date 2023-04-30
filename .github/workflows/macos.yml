@@ -31,9 +31,10 @@ jobs:
       # Runs a set of commands using the runners shell
       - name: Installing Dependencies
         run: |
-          #brew update
+          /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+          brew update
           brew install --cask xquartz
-          brew install tiger-vnc
+          brew install tightvnc
           pip install bs4 requests
       
       - name: Running a Remote Desktop
