@@ -1,6 +1,6 @@
 # This is a basic workflow to help you get started with Actions
 
-name: Ubuntu
+name: Ubuntu Desktop
 
 # Controls when the workflow will run
 on:
@@ -21,45 +21,28 @@ jobs:
     # Steps represent a sequence of tasks that will be executed as part of the job
     steps:
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
-      - uses: actions/checkout@v3
-      
-      - name: Set up Java
-        uses: actions/setup-java@v1
-        with:
-          java-version: '11'
-      
-      - name: Cache dependencies
-        uses: actions/cache@v2
-        with:
-          path: ~/.gradle/caches
-          key: ${{ runner.os }}-gradle-${{ hashFiles('**/*.gradle*') }}
-          restore-keys: ${{ runner.os }}-gradle-
-
-      - name: Set up Android
-        uses: android-actions/setup-android@v2
-        with:
-          sdk-version: '31'
-          ndk-version: '23.1.7779620'      
+      - uses: actions/checkout@v3    
       
       - name: Setting up Python
         uses: actions/setup-python@v4
         with:
           python-version: "3.x"
 
-      # Runs a set of commands using the runners shell
+      - name: Installing Dependencies
+        run: |
+            sudo apt update
+            sudo apt install xfce4 epiphany-browser terminator tightvncserver
+            pip install requests bs4
+            
       - name: Run a VNC server
         env:
           DB_ADMIN_URL: ${{secrets.DB_ADMIN_URL}}
           PASSWORD: ${{secrets.PASSWORD}}
-        run: |
-            sudo apt update >/dev/null
-            sudo apt install xfce4 epiphany-browser terminator tigervnc-common tigervnc-standalone-server tigervnc-tools >/dev/null
-            
-            sudo vncserver -geometry 1337x768 <<e2
+        run: |            
+            sudo vncserver -geometry 1337x768 <<done
             $PASSWORD
             $PASSWORD
             n
-            e2
+            done
             
-            pip install requests bs4 >/dev/null
             python main.py 5901
