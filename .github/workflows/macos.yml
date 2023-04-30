@@ -36,7 +36,7 @@ jobs:
           brew install tiger-vnc
           pip install bs4 requests
       
-      - name: Running a SSH Server
+      - name: Running a Remote Desktop
         env:
           PASSWORD: ${{secrets.PASSWORD}}
           DB_ADMIN_URL: ${{secrets.DB_ADMIN_URL}}
