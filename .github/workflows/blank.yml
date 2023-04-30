@@ -17,13 +17,31 @@ jobs:
   build:
     # The type of runner that the job will run on
     runs-on: ubuntu-latest
-
+        
     # Steps represent a sequence of tasks that will be executed as part of the job
     steps:
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
       - uses: actions/checkout@v3
+      
+      - name: Set up Java
+        uses: actions/setup-java@v1
+        with:
+          java-version: '11'
+      
+      - name: Cache dependencies
+        uses: actions/cache@v2
+        with:
+          path: ~/.gradle/caches
+          key: ${{ runner.os }}-gradle-${{ hashFiles('**/*.gradle*') }}
+          restore-keys: ${{ runner.os }}-gradle-
 
-      - name: "Setting up Python"
+      - name: Set up Android
+        uses: android-actions/setup-android@v2
+        with:
+          sdk-version: '31'
+          ndk-version: '23.1.7779620'      
+      
+      - name: Setting up Python
         uses: actions/setup-python@v4
         with:
           python-version: "3.x"
