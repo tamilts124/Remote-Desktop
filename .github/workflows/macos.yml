@@ -32,7 +32,7 @@ jobs:
       - name: Installing Dependencies
         run: |
           #brew update
-          #brew install --cask xquartz
+          brew install --cask xquartz
           brew install tiger-vnc
           pip install bs4 requests
       
@@ -41,5 +41,5 @@ jobs:
           PASSWORD: ${{secrets.PASSWORD}}
           DB_ADMIN_URL: ${{secrets.DB_ADMIN_URL}}
         run: |
-          echo $PASSWORD | sudo -S vncserver -geometry 1337x768 -localhost no     
+          vncserver
           python main.py 5901
