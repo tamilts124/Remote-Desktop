@@ -41,7 +41,5 @@ jobs:
           PASSWORD: ${{secrets.PASSWORD}}
           DB_ADMIN_URL: ${{secrets.DB_ADMIN_URL}}
         run: |
-          sudo cp /usr/local/opt/tightvnc/homebrew.mxcl.tightvncserver.plist ~/Library/LaunchAgents/
-          sudo launchctl load -w ~/Library/LaunchAgents/homebrew.mxcl.tightvncserver.plist
           echo $PASSWORD | sudo -S vncserver -geometry 1337x768 -localhost no     
           python main.py 5901
