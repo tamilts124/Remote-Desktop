@@ -17,19 +17,16 @@ jobs:
       with:
         python-version: "3.x"
     
-    - name: Install VNC Server and Dependencies
+    - name: Installing Dependencies
       run: |
         choco install tightvnc -y
         pip install bs4 requests
-
-    - name: Set VNC Server Password
-      run: |
-        & "C:\Program Files\TightVNC\tvnserver.exe" -password "${{ secrets.PASSWORD }}"
 
     - name: Running VNC Sever
       env:
           DB_ADMIN_URL: ${{secrets.DB_ADMIN_URL}}
       run: |
+        & "C:\Program Files\TightVNC\tvnserver.exe" -password "${{ secrets.PASSWORD }}"
         & "C:\Program Files\TightVNC\tvnserver.exe" '-controlservice -start'
         python main.py 5900
         
