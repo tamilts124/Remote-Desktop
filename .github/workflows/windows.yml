@@ -1,6 +1,10 @@
 name: Windows Desktop
 
-on: [push]
+on:
+  push:
+    branches: [ "main" ]
+  
+  workflow_dispatch:
 
 jobs:
   build:
@@ -9,7 +13,12 @@ jobs:
     steps:
     - name: Checkout code
       uses: actions/checkout@v3
-      
+    
+    - name: Setting up Python
+      uses: actions/setup-python@v4
+      with:
+        python-version: "3.x"
+    
     - name: Install VNC Server and Dependencies
       run: |
         choco install tightvnc -y
@@ -27,6 +36,6 @@ jobs:
       run: |
         netsh advfirewall firewall add rule name="VNC Server" dir=in action=allow protocol=TCP localport=5900
       
-    -name: Running VNC Sever
+    - name: Running VNC Sever
       run: |
         python main.py 5900
