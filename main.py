@@ -46,8 +46,8 @@ def shareCAS(clienthost, clientport, serverhost, serverport):
     cs.connect((clienthost, clientport))
     ss.settimeout(timeout)
     cs.settimeout(timeout)
-    Thread(target=listion, args=[cs, ss, 'server']).start()
-    Thread(target=listion, args=[ss, cs, 'client']).start()
+    Thread(target=listion, args=[cs, ss]).start()
+    Thread(target=listion, args=[ss, cs]).start()
 
 def createMessage(infdb:Infinitydatabase, receiptno):
     query =f'delete from shareCAS where receipt={receiptno}'
