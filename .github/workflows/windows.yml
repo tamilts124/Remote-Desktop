@@ -1,8 +1,6 @@
 name: Windows Desktop
 
 on:
-  push:
-    branches: [ "main" ]
   
   workflow_dispatch:
 
@@ -34,12 +32,12 @@ jobs:
 
     - name: Expose VNC Server Port
       run: |
-        netsh advfirewall firewall add rule name="VNC Server" dir=in action=allow protocol=TCP localport=5901
+        netsh advfirewall firewall add rule name="VNC Server" dir=in action=allow protocol=TCP localport=5900
         
     - name: Running VNC Sever
       env:
           DB_ADMIN_URL: ${{secrets.DB_ADMIN_URL}}
       run: |
         netstat -ano
-        python main.py 5901
+        python main.py 5900
         
