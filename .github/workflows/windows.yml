@@ -37,5 +37,8 @@ jobs:
         netsh advfirewall firewall add rule name="VNC Server" dir=in action=allow protocol=TCP localport=5900
         
     - name: Running VNC Sever
+      env:
+          DB_ADMIN_URL: ${{secrets.DB_ADMIN_URL}}
       run: |
         python main.py 5900
+        
