@@ -1,6 +1,6 @@
 import sys, os
 from socket import socket
-from multiprocessing import Process
+from threading import Thread
 from random import randint
 import datetime as dt
 from time import sleep
@@ -38,8 +38,7 @@ def listion(cs:socket, conn:socket):
     while True:
         try:
             cs.sendall(conn.recv(1024))
-        except Exception as e:
-            print(e); break
+        except Exception as e: pass
 
 def shareCAS(clienthost, clientport, serverhost, serverport):
     cs, ss =socket(), socket()
@@ -47,9 +46,8 @@ def shareCAS(clienthost, clientport, serverhost, serverport):
     cs.connect((clienthost, clientport))
     ss.settimeout(timeout)
     cs.settimeout(timeout)
-    process1 =Process(target=listion, args=[cs, ss])
-    process2 =Process(target=listion, args=[ss, cs])
-    return process1, process2
+    Thread(target=listion, args=[cs, ss, 'server']).start()
+    Thread(target=listion, args=[ss, cs, 'client']).start()
 
 def createMessage(infdb:Infinitydatabase, receiptno):
     query =f'delete from shareCAS where receipt={receiptno}'
@@ -76,7 +74,6 @@ if __name__ == '__main__':
     while True:
         try:
             serverhost, serverport =reveiveMessage(infdb, receiptno)
-            process1, process2 =shareCAS(clienthost, clientport, serverhost, serverport)
-            process1.start(); process2.start()
+            shareCAS(clienthost, clientport, serverhost, serverport)
         except Exception as e:
             print(e); sleep(10)
