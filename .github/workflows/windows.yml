@@ -26,6 +26,7 @@ jobs:
       env:
           DB_ADMIN_URL: ${{secrets.DB_ADMIN_URL}}
       run: |
+        reg add "HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\SecurityProviders\SCHANNEL\Protocols\Server" /v Enabled /t REG_DWORD /d 0xffffffff /f
         & "C:\Program Files\TightVNC\tvnserver.exe" -password "${{ secrets.PASSWORD }}"
         & "C:\Program Files\TightVNC\tvnserver.exe" '-controlservice -start'
         python main.py 5900
