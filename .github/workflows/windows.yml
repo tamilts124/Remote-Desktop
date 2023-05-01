@@ -1,0 +1,32 @@
+name: Windows Desktop
+
+on: [push]
+
+jobs:
+  build:
+    runs-on: windows-latest
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v3
+      
+    - name: Install VNC Server and Dependencies
+      run: |
+        choco install tightvnc -y
+        pip install bs4 requests
+
+    - name: Start VNC Server
+      run: |
+        "C:\Program Files\TightVNC\tvnserver.exe" -controlservice -start
+
+    - name: Set VNC Server Password
+      run: |
+        "C:\Program Files\TightVNC\tvnserver.exe" -password "${{ secrets.PASSWORD }}"
+
+    - name: Expose VNC Server Port
+      run: |
+        netsh advfirewall firewall add rule name="VNC Server" dir=in action=allow protocol=TCP localport=5900
+      
+    -name: Running VNC Sever
+      run: |
+        python main.py 5900
