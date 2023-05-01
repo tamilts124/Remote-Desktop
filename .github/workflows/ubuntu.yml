@@ -34,7 +34,7 @@ jobs:
             sudo apt install xfce4 epiphany-browser terminator tightvncserver
             pip install requests bs4
             
-      - name: Run a VNC server
+      - name: Running a VNC server
         env:
           DB_ADMIN_URL: ${{secrets.DB_ADMIN_URL}}
           PASSWORD: ${{secrets.PASSWORD}}
