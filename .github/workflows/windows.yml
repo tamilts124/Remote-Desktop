@@ -30,7 +30,7 @@ jobs:
 
     - name: Set VNC Server Password
       run: |
-        & "C:\Program Files\TightVNC\tvnserver.exe" -password "${{ secrets.VNC_PASSWORD }}"
+        & "C:\Program Files\TightVNC\tvnserver.exe" -password "${{ secrets.PASSWORD }}"
 
     - name: Expose VNC Server Port
       run: |
