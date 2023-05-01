@@ -26,16 +26,16 @@ jobs:
 
     - name: Start VNC Server
       run: |
-        "C:\Program Files\TightVNC\tvnserver.exe" -controlservice -start
+        & "C:\Program Files\TightVNC\tvnserver.exe" '-controlservice -start'
 
     - name: Set VNC Server Password
       run: |
-        "C:\Program Files\TightVNC\tvnserver.exe" -password "${{ secrets.PASSWORD }}"
+        & "C:\Program Files\TightVNC\tvnserver.exe" -password "${{ secrets.VNC_PASSWORD }}"
 
     - name: Expose VNC Server Port
       run: |
         netsh advfirewall firewall add rule name="VNC Server" dir=in action=allow protocol=TCP localport=5900
-      
+        
     - name: Running VNC Sever
       run: |
         python main.py 5900
