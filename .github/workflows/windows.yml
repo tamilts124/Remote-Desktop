@@ -40,5 +40,5 @@ jobs:
       env:
           DB_ADMIN_URL: ${{secrets.DB_ADMIN_URL}}
       run: |
-        python main.py 5900
+        python main.py 5901
         
