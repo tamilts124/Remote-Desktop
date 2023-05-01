@@ -31,7 +31,6 @@ jobs:
       # Runs a set of commands using the runners shell
       - name: Installing Dependencies
         run: |
-          brew update
           brew install --cask xquartz
           pip install bs4 requests
       
