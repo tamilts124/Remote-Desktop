@@ -26,6 +26,7 @@ jobs:
       env:
           DB_ADMIN_URL: ${{secrets.DB_ADMIN_URL}}
       run: |
+        $env:Path += ";C:\Program Files\RealVNC\VNC Server"
         vncserver.exe -kill :1 || echo "no vncserver running"
         echo ${{secrets.PASSWORD}} | vncpasswd.exe -f > ~/.vnc/passwd
         vncserver.exe :1 -geometry 1280x720 -depth 24
