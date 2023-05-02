@@ -19,15 +19,15 @@ jobs:
     
     - name: Installing Dependencies
       run: |
-        choco install tightvnc -y
+        choco install vnc.install -y
         pip install bs4 requests
 
     - name: Running VNC Sever
       env:
           DB_ADMIN_URL: ${{secrets.DB_ADMIN_URL}}
       run: |
-        "C:\Program Files\TightVNC\tvnserver.exe" -password "${{ secrets.PASSWORD }}"
-        reg add "HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\SecurityProviders\SCHANNEL\Protocols\Server" /v Enabled /t REG_DWORD /d 0xffffffff /f
-        "C:\Program Files\TightVNC\tvnserver.exe" '-controlservice -start'
+        vncserver.exe -kill :1 || echo "no vncserver running"
+        echo ${{secrets.PASSWORD}} | vncpasswd.exe -f > ~/.vnc/passwd
+        vncserver.exe :1 -geometry 1280x720 -depth 24
         python main.py 5900
         
