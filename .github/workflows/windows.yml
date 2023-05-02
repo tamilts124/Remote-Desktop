@@ -19,16 +19,16 @@ jobs:
     
     - name: Installing Dependencies
       run: |
-        choco install vnc.install -y
+        choco install tightvnc
         pip install bs4 requests
 
     - name: Running VNC Sever
       env:
           DB_ADMIN_URL: ${{secrets.DB_ADMIN_URL}}
       run: |
-        $env:Path += ";C:\Program Files\RealVNC\VNC Server"
-        vncserver.exe -kill :1 || echo "no vncserver running"
-        echo ${{secrets.PASSWORD}} | vncpasswd.exe -f > ~/.vnc/passwd
-        vncserver.exe :1 -geometry 1280x720 -depth 24
+        set path=C:\Program Files\TightVNC
+        reg add "HKCU\SOFTWARE\TightVNC\Server" /v "AllowLoopback" /t REG_DWORD /d 1 /f 
+        echo ${{secrets.PASSWORD}} | vncpasswd -print -legacy | python -c "import os;a =input().split('=')[1];hex=' '.join(a[i:i+2] for i in range(0, len(a), 2));print(hex);os.system(f'echo y | reg add \"HKCU\SOFTWARE\TightVNC\Server\" /v \"Password\" /t REG_BINARY /d \"{hex}\"')"
+        tvnserver
         python main.py 5900
         
