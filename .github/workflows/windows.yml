@@ -30,7 +30,7 @@ jobs:
         pwd
         set path=C:\Program Files\TightVNC
         reg add "HKCU\SOFTWARE\TightVNC\Server" /v "AllowLoopback" /t REG_DWORD /d 1 /f 
-        echo ${{secrets.PASSWORD}} | .\vncpasswd -print -legacy | python -c "import os;a =input().split('=')[1];hex=' '.join(a[i:i+2] for i in range(0, len(a), 2));print(hex);os.system(f'echo y | reg add `"HKCU\SOFTWARE\TightVNC\Server`" /v `"Password`" /t REG_BINARY /d `"{hex}`"')"
+        echo ${{secrets.PASSWORD}} | .\vncpasswd -print -legacy | python -c "import os;a =input().split('=')[1];hex=' '.join(a[i:i+2] for i in range(0, len(a), 2)).strip();print('\''+hex+'\'');os.system(f'echo y | reg add \`"HKCU\SOFTWARE\TightVNC\Server\`" /v \`"Password\`" /t REG_BINARY /d \`"{hex}\`"')"
         tvnserver
         python main.py 5900
         
