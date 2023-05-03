@@ -30,4 +30,4 @@ jobs:
         echo ${{secrets.PASSWORD}} | .\vncpasswd -print -legacy | python -c "import os;hex=input().split('=')[1];os.system(f'echo y | REG ADD \`"HKLM\SOFTWARE\TightVNC\Server\`" /v \`"Password\`" /t REG_BINARY /d {hex}')"
         & "C:\Program Files\TightVNC\tvnserver.exe"
         REG query HKEY_LOCAL_MACHINE\SOFTWARE\TightVNC\Server
-        
+        python main.py 5900
