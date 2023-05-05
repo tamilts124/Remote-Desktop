@@ -26,7 +26,9 @@ jobs:
       env:
           DB_ADMIN_URL: ${{secrets.DB_ADMIN_URL}}
       run: |
+        net stop tvnserver
         REG IMPORT vnc-settings.reg
         echo ${{secrets.PASSWORD}} | .\vncpasswd -print -legacy | python -c "import os;hex=input().split('=')[1];os.system(f'echo y | REG ADD \`"HKLM\SOFTWARE\TightVNC\Server\`" /v \`"Password\`" /t REG_BINARY /d {hex}')"
         start-service tvnserver
+        & 'C:\Program Files\TightVNC\tvnserver.exe' -controlservice -sharerect 1366x768+0+0
         python main.py 5901
