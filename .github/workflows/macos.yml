@@ -38,9 +38,7 @@ jobs:
           sudo installer -pkg MacPorts-2.8.1-12-Monterey.pkg -target /
           sudo port selfupdate
           sudo port upgrade outdated
-          sudo port search xfce4
-          sudo port install webkit2-gtk
-          sudo port install gnome
+          sudo port install xfce4
           pip install bs4 requests
       
       - name: Running a Remote Desktop
