@@ -32,7 +32,8 @@ jobs:
       - name: Installing Dependencies
         run: |
           brew install --cask xquartz
-          brew install gnome
+          sudo port -v selfupdate
+          sudo port install gnome
           pip install bs4 requests
       
       - name: Running a Remote Desktop
