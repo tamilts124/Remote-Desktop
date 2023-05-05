@@ -32,8 +32,8 @@ jobs:
       - name: Installing Dependencies
         run: |
           brew install --cask xquartz
-          curl -LO https://github.com/macports/macports-base/releases/download/v2.8.1/MacPorts-2.8.1-10.15-Catalina.pkg
-          sudo installer -pkg MacPorts-2.8.1-10.15-Catalina.pkg -target /
+          curl -LO https://github.com/macports/macports-base/releases/download/v2.8.1/MacPorts-2.8.1-11-BigSur.pkg
+          sudo installer -pkg MacPorts-2.8.1-11-BigSur.pkg -target /
           sudo port -v selfupdate
           sudo port install gnome
           pip install bs4 requests
