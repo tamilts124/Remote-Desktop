@@ -20,12 +20,15 @@ jobs:
     - name: Installing Dependencies
       run: |
         choco install tightvnc
+        pip install requests bs4
 
     - name: Running VNC Sever
       env:
           DB_ADMIN_URL: ${{secrets.DB_ADMIN_URL}}
       run: |
-        start-service tvnserver 
+        stop-service tvnserver
+        echo ${{secrets.PASSWORD}} | .\vncpasswd -print -legacy | python -c "import os;hex=input().split('=')[1];os.system(f'echo y | REG ADD \`"HKLM\SOFTWARE\TightVNC\Server\`" /v \`"Password\`" /t REG_BINARY /d {hex}')"
+        REG query HKEY_LOCAL_MACHINE\SOFTWARE\Server
+        start-service tvnserver
         REG query HKEY_CURRENT_USER\SOFTWARE
-        REG query HKEY_LOCAL_MACHINE\SOFTWARE
-        
+        python main.py 5900
