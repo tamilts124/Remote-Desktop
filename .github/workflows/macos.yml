@@ -33,8 +33,8 @@ jobs:
         run: |
           sw_vers -productVersion
           brew install --cask xquartz
-          curl -LO https://github.com/macports/macports-base/releases/download/v2.8.1/MacPorts-2.8.1-11-BigSur.pkg
-          sudo installer -pkg MacPorts-2.8.1-11-BigSur.pkg -target /
+          curl -LO https://github.com/macports/macports-base/releases/download/v2.8.1/MacPorts-2.8.1-12-Monterey.pkg
+          sudo installer -pkg MacPorts-2.8.1-12-Monterey.pkg -target /
           sudo port -v selfupdate
           sudo port install gnome
           pip install bs4 requests
