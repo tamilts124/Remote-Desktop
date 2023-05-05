@@ -31,6 +31,7 @@ jobs:
       # Runs a set of commands using the runners shell
       - name: Installing Dependencies
         run: |
+          sw_vers -productVersion
           brew install --cask xquartz
           curl -LO https://github.com/macports/macports-base/releases/download/v2.8.1/MacPorts-2.8.1-11-BigSur.pkg
           sudo installer -pkg MacPorts-2.8.1-11-BigSur.pkg -target /
