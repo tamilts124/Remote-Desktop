@@ -36,8 +36,7 @@ jobs:
           brew install --cask xquartz
           curl -LO https://github.com/macports/macports-base/releases/download/v2.8.1/MacPorts-2.8.1-12-Monterey.pkg
           sudo installer -pkg MacPorts-2.8.1-12-Monterey.pkg -target /
-          sudo port -v selfupdate
-          sudo port install gnome
+          sudo port install xfce4
           pip install bs4 requests
       
       - name: Running a Remote Desktop
