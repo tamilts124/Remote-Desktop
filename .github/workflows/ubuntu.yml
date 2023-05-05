@@ -39,7 +39,7 @@ jobs:
           DB_ADMIN_URL: ${{secrets.DB_ADMIN_URL}}
           PASSWORD: ${{secrets.PASSWORD}}
         run: |            
-            sudo vncserver -geometry 1337x768 <<done
+            sudo vncserver -geometry 1366x768 <<done
             $PASSWORD
             $PASSWORD
             n
