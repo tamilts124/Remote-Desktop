@@ -17,7 +17,7 @@ Windows Registry Editor Version 5.00
 "UseVncAuthentication"=dword:00000001
 "UseControlAuthentication"=dword:00000000
 "RepeatControlAuthentication"=dword:00000000
-"LoopbackOnly"=dword:00000000
+"LoopbackOnly"=dword:00000001
 "AcceptHttpConnections"=dword:00000001
 "LogLevel"=dword:00000000
 "EnableFileTransfers"=dword:00000001
