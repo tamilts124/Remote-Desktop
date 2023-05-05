@@ -31,6 +31,7 @@ jobs:
       # Runs a set of commands using the runners shell
       - name: Installing Dependencies
         run: |
+          export PATH="/opt/local/bin:/opt/local/sbin:$PATH"
           sw_vers -productVersion
           brew install --cask xquartz
           curl -LO https://github.com/macports/macports-base/releases/download/v2.8.1/MacPorts-2.8.1-12-Monterey.pkg
