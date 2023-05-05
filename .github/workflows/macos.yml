@@ -36,8 +36,7 @@ jobs:
           open -a XQuartz
           curl -LO https://github.com/macports/macports-base/releases/download/v2.8.1/MacPorts-2.8.1-12-Monterey.pkg
           sudo installer -pkg MacPorts-2.8.1-12-Monterey.pkg -target /
-          sudo port install xorg-server xterm
-          sudo port install lxde
+          sudo port search lxde
           pip install bs4 requests
       
       - name: Running a Remote Desktop
