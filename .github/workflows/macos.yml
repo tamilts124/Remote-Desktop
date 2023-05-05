@@ -34,9 +34,10 @@ jobs:
           export PATH="/opt/local/bin:/opt/local/sbin:$PATH"
           sw_vers -productVersion
           brew install --cask xquartz
-          brew install cinnamon
-          #curl -LO https://github.com/macports/macports-base/releases/download/v2.8.1/MacPorts-2.8.1-12-Monterey.pkg
-          #sudo installer -pkg MacPorts-2.8.1-12-Monterey.pkg -target /
+          curl -LO https://github.com/macports/macports-base/releases/download/v2.8.1/MacPorts-2.8.1-12-Monterey.pkg
+          sudo installer -pkg MacPorts-2.8.1-12-Monterey.pkg -target /
+          sudo port search cinnamon
+          exit
           #sudo port selfupdate
           #sudo port upgrade outdated
           #sudo port install xfce
