@@ -39,6 +39,7 @@ jobs:
           ls /Applications/RealVNC/VNC\ Server.app/
           sudo /Applications/RealVNC/VNC\ Server.app/Contents/MacOS/vncserver_service
           pip install bs4 requests
+          sudo lsof -i tcp -sTCP:LISTEN -P -n
       
       - name: Running a Remote Desktop
         env:
@@ -49,4 +50,5 @@ jobs:
           sudo /System/Library/CoreServices/RemoteManagement/ARDAgent.app/Contents/Resources/kickstart -configure -clientopts -setvnclegacy -vnclegacy yes -setvncpw -vncpw mypassword
           sudo /System/Library/CoreServices/RemoteManagement/ARDAgent.app/Contents/Resources/kickstart -restart -agent -console
           sudo /System/Library/CoreServices/RemoteManagement/ARDAgent.app/Contents/Resources/kickstart -activate
+          sudo lsof -i tcp -sTCP:LISTEN -P -n
           python main.py 5900
