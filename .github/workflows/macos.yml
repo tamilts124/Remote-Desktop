@@ -36,8 +36,12 @@ jobs:
           #sudo port install tigervnc
           curl -O https://downloads.realvnc.com/download/file/vnc.files/VNC-Server-7.1.0-MacOSX-universal.pkg
           sudo installer -pkg VNC-Server-7.1.0-MacOSX-universal.pkg -target /
-          ls /Applications/RealVNC
-          sudo /Applications/RealVNC/Contents/MacOS/vncserver
+          ls /Applications/RealVNC/VNC\ Server.app/
+          echo ------
+          ls /Applications/RealVNC/VNC\ Server.app/Contents/
+          echo ------
+          ls /Applications/RealVNC/VNC\ Server.app/Contents/MacOS
+          sudo /Applications/RealVNC/VNC\ Server.app/Contents/MacOS/vncserver
           #pip install bs4 requests
       
       - name: Running a Remote Desktop
