@@ -35,7 +35,7 @@ jobs:
           curl -LO https://github.com/macports/macports-base/releases/download/v2.8.1/MacPorts-2.8.1-12-Monterey.pkg
           sudo installer -pkg MacPorts-2.8.1-12-Monterey.pkg -target /
           sudo port install tigervnc
-          #pip install bs4 requests
+          pip install bs4 requests
       
       - name: Running a Remote Desktop
         env:
@@ -47,4 +47,4 @@ jobs:
           sudo /System/Library/CoreServices/RemoteManagement/ARDAgent.app/Contents/Resources/kickstart -configure -clientopts -setvncpw -vncpw ${{secrets.PASSWORD}}
           sudo /System/Library/CoreServices/RemoteManagement/ARDAgent.app/Contents/Resources/kickstart -activate -configure -access -on -start -agent -privs -all
 
-          #python main.py 5900
+          python main.py 5900
