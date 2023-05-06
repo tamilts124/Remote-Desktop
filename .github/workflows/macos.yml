@@ -32,16 +32,18 @@ jobs:
       - name: Installing Dependencies
         run: |
           export PATH="/opt/local/bin:/opt/local/sbin:$PATH"        
-          sudo /System/Library/CoreServices/RemoteManagement/ARDAgent.app/Contents/Resources/kickstart -diactivate -stop
           #curl -LO https://github.com/macports/macports-base/releases/download/v2.8.1/MacPorts-2.8.1-12-Monterey.pkg
           #sudo installer -pkg MacPorts-2.8.1-12-Monterey.pkg -target /
+
           brew install --cask vine-server
-          ls -l /Applications/Vine\ Server.app/Contents/MacOS
-          echo ----
-          ls -l /Applications/Vine\ Server.app/Contents/Resources/OSXvnc
+          pip install bs4 requests
+      
+      - name: Running a Remote Desktop
+        env:
+          DB_ADMIN_URL: ${{secrets.DB_ADMIN_URL}}
+        run: |
+          storepasswd ${{secrets.PASSWORD}} password
           
-          storepasswd ${{secrets.PASSWORD}} password.
-          ls -l
           defaults write com.redstonesoftware.VineServer Authentication.VncAuthPassword -string "mypassword"
           defaults write com.redstonesoftware.VineServer Authentication.AllowRemoteBlankPassword -bool false
           defaults write com.redstonesoftware.VineServer Authentication.AllowLocalConnections -bool true
@@ -59,13 +61,6 @@ jobs:
           defaults write com.redstonesoftware.VineServer DisplayHeight -int 768
           defaults write com.redstonesoftware.VineServer DisplayDepth -int 24
 
-          OSXvnc-server -rfbauth password
-          
+          OSXvnc-server -rfbauth password &
           sudo lsof -i tcp -sTCP:LISTEN -P -n
-          #pip install bs4 requests
-      
-      - name: Running a Remote Desktop
-        env:
-          DB_ADMIN_URL: ${{secrets.DB_ADMIN_URL}}
-        run: |
-          #python main.py 5900
+          python main.py 5901
