@@ -39,6 +39,8 @@ jobs:
           ls -l /Applications/Vine\ Server.app/Contents/MacOS
           echo ----
           ls -l /Applications/Vine\ Server.app/Contents/Resources/OSXvnc
+          storepasswd
+          storepasswd --help
           defaults write com.redstonesoftware.VineServer Authentication.VncAuthPassword -string "mypassword"
           defaults write com.redstonesoftware.VineServer Authentication.AllowRemoteBlankPassword -bool false
           defaults write com.redstonesoftware.VineServer Authentication.AllowLocalConnections -bool true
