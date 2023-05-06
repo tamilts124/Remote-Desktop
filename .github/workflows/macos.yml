@@ -5,8 +5,8 @@ name: MacOs Desktop
 # Controls when the workflow will run
 on:
   # Triggers the workflow on push or pull request events but only for the "main" branch
-#   push:
-#     branches: [ "main" ]
+  push:
+     branches: [ "main" ]
 
   # Allows you to run this workflow manually from the Actions tab
   workflow_dispatch:
@@ -31,9 +31,6 @@ jobs:
       # Runs a set of commands using the runners shell
       - name: Installing Dependencies
         run: |
-          export PATH="/opt/local/bin:/opt/local/sbin:$PATH"
-          brew install --cask xquartz
-          open -a XQuartz
           curl -LO https://github.com/macports/macports-base/releases/download/v2.8.1/MacPorts-2.8.1-12-Monterey.pkg
           sudo installer -pkg MacPorts-2.8.1-12-Monterey.pkg -target /
           sudo port install tigerVNC
@@ -44,6 +41,7 @@ jobs:
         env:
           DB_ADMIN_URL: ${{secrets.DB_ADMIN_URL}}
         run: |
+          export PATH="/opt/local/bin:/opt/local/sbin:$PATH"
           vncserver
           sudo /System/Library/CoreServices/RemoteManagement/ARDAgent.app/Contents/Resources/kickstart -configure -allowAccessFor -allUsers -privs -all
           sudo /System/Library/CoreServices/RemoteManagement/ARDAgent.app/Contents/Resources/kickstart -configure -clientopts -setvnclegacy -vnclegacy yes
