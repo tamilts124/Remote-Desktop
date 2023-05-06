@@ -60,7 +60,9 @@ jobs:
           defaults write com.redstonesoftware.VineServer DisplayWidth -int 1024
           defaults write com.redstonesoftware.VineServer DisplayHeight -int 768
           defaults write com.redstonesoftware.VineServer DisplayDepth -int 24
+          
+          OSXvnc-server --help
 
           OSXvnc-server -rfbauth password &
           sudo lsof -i tcp -sTCP:LISTEN -P -n
-          python main.py 5901
+          #python main.py 5901
