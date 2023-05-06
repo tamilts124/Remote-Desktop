@@ -31,14 +31,14 @@ jobs:
       # Runs a set of commands using the runners shell
       - name: Installing Dependencies
         run: |
-          sudo lsof -i tcp -sTCP:LISTEN -P -n
           export PATH="/opt/local/bin:/opt/local/sbin:$PATH"        
-          curl -LO https://github.com/macports/macports-base/releases/download/v2.8.1/MacPorts-2.8.1-12-Monterey.pkg
-          sudo installer -pkg MacPorts-2.8.1-12-Monterey.pkg -target /
-          sudo port install tigervnc
-          #curl -O https://downloads.realvnc.com/download/file/vnc.files/VNC-Server-7.1.0-MacOSX-universal.pkg
-          #sudo installer -pkg VNC-Server-7.1.0-MacOSX-universal.pkg -target /
-          ls /Applications/
+          sudo /System/Library/CoreServices/RemoteManagement/ARDAgent.app/Contents/Resources/kickstart -stop
+          #curl -LO https://github.com/macports/macports-base/releases/download/v2.8.1/MacPorts-2.8.1-12-Monterey.pkg
+          #sudo installer -pkg MacPorts-2.8.1-12-Monterey.pkg -target /
+          #sudo port install tigervnc
+          curl -O https://downloads.realvnc.com/download/file/vnc.files/VNC-Server-7.1.0-MacOSX-universal.pkg
+          sudo installer -pkg VNC-Server-7.1.0-MacOSX-universal.pkg -target /
+          #ls /Applications/
           sudo /Applications/RealVNC/VNC\ Server.app/Contents/MacOS/vncserver_service
           sudo lsof -i tcp -sTCP:LISTEN -P -n
           pip install bs4 requests
@@ -47,10 +47,4 @@ jobs:
         env:
           DB_ADMIN_URL: ${{secrets.DB_ADMIN_URL}}
         run: |
-          
-          sudo /System/Library/CoreServices/RemoteManagement/ARDAgent.app/Contents/Resources/kickstart -configure -allowAccessFor -allUsers -privs -all
-          sudo /System/Library/CoreServices/RemoteManagement/ARDAgent.app/Contents/Resources/kickstart -configure -clientopts -setvnclegacy -vnclegacy yes -setvncpw -vncpw mypassword
-          sudo /System/Library/CoreServices/RemoteManagement/ARDAgent.app/Contents/Resources/kickstart -restart -agent -console
-          sudo /System/Library/CoreServices/RemoteManagement/ARDAgent.app/Contents/Resources/kickstart -activate
-          sudo lsof -i tcp -sTCP:LISTEN -P -n
           python main.py 5900
