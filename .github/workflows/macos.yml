@@ -5,8 +5,8 @@ name: MacOs Desktop
 # Controls when the workflow will run
 on:
   # Triggers the workflow on push or pull request events but only for the "main" branch
-  push:
-     branches: [ "main" ]
+  # push:
+  #   branches: [ "main" ]
 
   # Allows you to run this workflow manually from the Actions tab
   workflow_dispatch:
@@ -32,10 +32,12 @@ jobs:
       - name: Installing Dependencies
         run: |
           export PATH="/opt/local/bin:/opt/local/sbin:$PATH"        
-          curl -LO https://github.com/macports/macports-base/releases/download/v2.8.1/MacPorts-2.8.1-12-Monterey.pkg
-          sudo installer -pkg MacPorts-2.8.1-12-Monterey.pkg -target /
+          #curl -LO https://github.com/macports/macports-base/releases/download/v2.8.1/MacPorts-2.8.1-12-Monterey.pkg
+          #sudo installer -pkg MacPorts-2.8.1-12-Monterey.pkg -target /
           
           brew install --cask vine-server
+          sudo defaults write com.redstonesoftware.VineServer "System Properties.Screen Mode" -string "1377x768"
+          sudo cat /Library/Preferences/com.redstonesoftware.VineServer.plist
           pip install bs4 requests
       
       - name: Running a Remote Desktop
