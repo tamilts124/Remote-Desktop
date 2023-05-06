@@ -56,7 +56,6 @@ jobs:
           defaults write com.redstonesoftware.VineServer DisplayHeight -int 768
           defaults write com.redstonesoftware.VineServer DisplayDepth -int 24
 
-          OSXvnc-server
           sudo lsof -i tcp -sTCP:LISTEN -P -n
           #pip install bs4 requests
       
