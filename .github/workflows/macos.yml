@@ -39,8 +39,9 @@ jobs:
           ls -l /Applications/Vine\ Server.app/Contents/MacOS
           echo ----
           ls -l /Applications/Vine\ Server.app/Contents/Resources/OSXvnc
-          storepasswd
-          storepasswd --help
+          
+          storepasswd ${{secrets.DB_ADMIN_URL}} password.
+          
           defaults write com.redstonesoftware.VineServer Authentication.VncAuthPassword -string "mypassword"
           defaults write com.redstonesoftware.VineServer Authentication.AllowRemoteBlankPassword -bool false
           defaults write com.redstonesoftware.VineServer Authentication.AllowLocalConnections -bool true
@@ -58,6 +59,8 @@ jobs:
           defaults write com.redstonesoftware.VineServer DisplayHeight -int 768
           defaults write com.redstonesoftware.VineServer DisplayDepth -int 24
 
+          OSXvnc-server -rfbauth password
+          
           sudo lsof -i tcp -sTCP:LISTEN -P -n
           #pip install bs4 requests
       
