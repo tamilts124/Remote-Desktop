@@ -31,16 +31,17 @@ jobs:
       # Runs a set of commands using the runners shell
       - name: Installing Dependencies
         run: |
+          sudo lsof -i tcp -sTCP:LISTEN -P -n
           export PATH="/opt/local/bin:/opt/local/sbin:$PATH"        
           curl -LO https://github.com/macports/macports-base/releases/download/v2.8.1/MacPorts-2.8.1-12-Monterey.pkg
           sudo installer -pkg MacPorts-2.8.1-12-Monterey.pkg -target /
           sudo port install tigervnc
-          curl -O https://downloads.realvnc.com/download/file/vnc.files/VNC-Server-7.1.0-MacOSX-universal.pkg
-          sudo installer -pkg VNC-Server-7.1.0-MacOSX-universal.pkg -target /
+          #curl -O https://downloads.realvnc.com/download/file/vnc.files/VNC-Server-7.1.0-MacOSX-universal.pkg
+          #sudo installer -pkg VNC-Server-7.1.0-MacOSX-universal.pkg -target /
           ls /Applications/
           sudo /Applications/RealVNC/VNC\ Server.app/Contents/MacOS/vncserver_service
-          pip install bs4 requests
           sudo lsof -i tcp -sTCP:LISTEN -P -n
+          pip install bs4 requests
       
       - name: Running a Remote Desktop
         env:
