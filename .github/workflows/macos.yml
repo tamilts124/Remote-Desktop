@@ -32,9 +32,9 @@ jobs:
       - name: Installing Dependencies
         run: |
           export PATH="/opt/local/bin:/opt/local/sbin:$PATH"        
-          #curl -LO https://github.com/macports/macports-base/releases/download/v2.8.1/MacPorts-2.8.1-12-Monterey.pkg
-          #sudo installer -pkg MacPorts-2.8.1-12-Monterey.pkg -target /
-
+          curl -LO https://github.com/macports/macports-base/releases/download/v2.8.1/MacPorts-2.8.1-12-Monterey.pkg
+          sudo installer -pkg MacPorts-2.8.1-12-Monterey.pkg -target /
+          
           brew install --cask vine-server
           pip install bs4 requests
       
@@ -43,26 +43,5 @@ jobs:
           DB_ADMIN_URL: ${{secrets.DB_ADMIN_URL}}
         run: |
           storepasswd ${{secrets.PASSWORD}} password
-          
-          defaults write com.redstonesoftware.VineServer Authentication.VncAuthPassword -string "mypassword"
-          defaults write com.redstonesoftware.VineServer Authentication.AllowRemoteBlankPassword -bool false
-          defaults write com.redstonesoftware.VineServer Authentication.AllowLocalConnections -bool true
-          defaults write org.net.sourceforge.VineServer Display-Number -int 0
-          defaults write org.net.sourceforge.VineServer ConnectToAddress -string "127.0.0.1:5901"
-          defaults write com.redstonesoftware.VineServer Display.BuiltinModelines -bool false
-          defaults write com.redstonesoftware.VineServer Display.CustomMode -bool true
-          defaults write com.redstonesoftware.VineServer Display.FixedAspectRatio -bool true
-          defaults write com.redstonesoftware.VineServer Display.FixedAspectRatio -string "4:3"
-          defaults write com.redstonesoftware.VineServer Display.ForceTrueColor -bool true
-          defaults write com.redstonesoftware.VineServer Display.UseAllDisplays -bool false
-          defaults write com.redstonesoftware.VineServer Display.UseOpenGL -bool false
-          defaults write com.redstonesoftware.VineServer Display.UseSystemColors -bool false
-          defaults write com.redstonesoftware.VineServer DisplayWidth -int 1024
-          defaults write com.redstonesoftware.VineServer DisplayHeight -int 768
-          defaults write com.redstonesoftware.VineServer DisplayDepth -int 24
-          
-          OSXvnc-server --help
-
           OSXvnc-server -rfbauth password &
-          sudo lsof -i tcp -sTCP:LISTEN -P -n
-          #python main.py 5901
+          python main.py 5901
