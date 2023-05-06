@@ -34,14 +34,17 @@ jobs:
           export PATH="/opt/local/bin:/opt/local/sbin:$PATH"        
           #curl -LO https://github.com/macports/macports-base/releases/download/v2.8.1/MacPorts-2.8.1-12-Monterey.pkg
           #sudo port install tigervnc
-          pip install bs4 requests
+          brew install realvnc-vnc-server
+          sudo brew services start realvnc-vnc-server
+          sudo /usr/local/bin/vncpasswd -service
+          #pip install bs4 requests
       
       - name: Running a Remote Desktop
         env:
           DB_ADMIN_URL: ${{secrets.DB_ADMIN_URL}}
         run: |
           
-          sudo /Applications/RealVNC\ Server.app/Contents/MacOS/vncpasswd -service
+          
           sudo launchctl load /Library/LaunchDaemons/com.realvnc.vncserver-oneshot.plist
           
           
