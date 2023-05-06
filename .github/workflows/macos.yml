@@ -36,7 +36,8 @@ jobs:
           #curl -LO https://github.com/macports/macports-base/releases/download/v2.8.1/MacPorts-2.8.1-12-Monterey.pkg
           #sudo installer -pkg MacPorts-2.8.1-12-Monterey.pkg -target /
           brew install --cask vine-server
-          ls /Applications/Vine\ Server.app/Contents
+          ls /Applications/Vine\ Server.app/Contents/MacOS
+          ls /Applications/Vine\ Server.app/Contents/Resources
           /Applications/VineServer.app/Contents/Resources/vncserver -kill :0
           defaults write com.redstonesoftware.VineServer Authentication.VncAuthPassword -string "mypassword"
           defaults write com.redstonesoftware.VineServer Authentication.AllowRemoteBlankPassword -bool false
