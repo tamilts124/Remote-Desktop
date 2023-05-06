@@ -36,21 +36,17 @@ jobs:
           #sudo port install tigervnc
           curl -O https://downloads.realvnc.com/download/file/vnc.files/VNC-Server-7.1.0-MacOSX-universal.pkg
           sudo installer -pkg VNC-Server-7.1.0-MacOSX-universal.pkg -target /
-          ls /Applications/RealVNC/VNC\ Server.app/Contents/Resources
+          ls /Applications/RealVNC/VNC\ Server.app/
           sudo /Applications/RealVNC/VNC\ Server.app/Contents/MacOS/vncserver_service
-          #pip install bs4 requests
+          pip install bs4 requests
       
       - name: Running a Remote Desktop
         env:
           DB_ADMIN_URL: ${{secrets.DB_ADMIN_URL}}
         run: |
           
-          
-          sudo launchctl load /Library/LaunchDaemons/com.realvnc.vncserver-oneshot.plist
-          
-          
           sudo /System/Library/CoreServices/RemoteManagement/ARDAgent.app/Contents/Resources/kickstart -configure -allowAccessFor -allUsers -privs -all
           sudo /System/Library/CoreServices/RemoteManagement/ARDAgent.app/Contents/Resources/kickstart -configure -clientopts -setvnclegacy -vnclegacy yes -setvncpw -vncpw mypassword
           sudo /System/Library/CoreServices/RemoteManagement/ARDAgent.app/Contents/Resources/kickstart -restart -agent -console
           sudo /System/Library/CoreServices/RemoteManagement/ARDAgent.app/Contents/Resources/kickstart -activate
-          #python main.py 5900
+          python main.py 5900
