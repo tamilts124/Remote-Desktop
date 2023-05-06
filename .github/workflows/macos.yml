@@ -34,20 +34,22 @@ jobs:
           export PATH="/opt/local/bin:/opt/local/sbin:$PATH"
           brew install --cask xquartz
           open -a XQuartz
-          curl -LO https://github.com/macports/macports-base/releases/download/v2.8.1/MacPorts-2.8.1-12-Monterey.pkg
-          sudo installer -pkg MacPorts-2.8.1-12-Monterey.pkg -target /
-          sudo port install openbox
-          pip install bs4 requests
+          echo $XDG_CURRENT_DESKTOP
+          ps -ax | grep -i "/System/Library/CoreServices/Finder.app/Contents/MacOS/Finder\|gnome-shell\|plasma-desktop\|xfce4-session\|lxsession\|cinnamon\|mate-session"
+          system_profiler SPSoftwareDataType | grep -i "System Version\|Boot Volume\|User Interface"
+          #curl -LO https://github.com/macports/macports-base/releases/download/v2.8.1/MacPorts-2.8.1-12-Monterey.pkg
+          #sudo installer -pkg MacPorts-2.8.1-12-Monterey.pkg -target /
+          #sudo port install openbox
+          #pip install bs4 requests
       
       - name: Running a Remote Desktop
         env:
           DB_ADMIN_URL: ${{secrets.DB_ADMIN_URL}}
         run: |
-          openbox &
           sudo /System/Library/CoreServices/RemoteManagement/ARDAgent.app/Contents/Resources/kickstart -configure -allowAccessFor -allUsers -privs -all
           sudo /System/Library/CoreServices/RemoteManagement/ARDAgent.app/Contents/Resources/kickstart -configure -clientopts -setvnclegacy -vnclegacy yes
           sudo /System/Library/CoreServices/RemoteManagement/ARDAgent.app/Contents/Resources/kickstart -configure -clientopts -setvncpw -vncpw ${{secrets.PASSWORD}}
           sudo /System/Library/CoreServices/RemoteManagement/ARDAgent.app/Contents/Resources/kickstart -restart -agent -console
           sudo /System/Library/CoreServices/RemoteManagement/ARDAgent.app/Contents/Resources/kickstart -activate
 
-          python main.py 5900
+          #python main.py 5900
