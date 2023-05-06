@@ -37,7 +37,6 @@ jobs:
           
           brew install --cask vine-server
           sudo defaults write com.redstonesoftware.VineServer "System Properties.Screen Mode" -string "1377x768"
-          sudo cat /Library/Preferences/com.redstonesoftware.VineServer.plist
           pip install bs4 requests
       
       - name: Running a Remote Desktop
