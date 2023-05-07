@@ -36,10 +36,6 @@ jobs:
           #sudo installer -pkg MacPorts-2.8.1-12-Monterey.pkg -target /
           
           brew install x11vnc
-          echo -----
-          ls /Applications
-          echo ----
-          x11vnc --help
           pip install bs4 requests
       
       - name: Running a VNC Server
@@ -47,5 +43,5 @@ jobs:
           DB_ADMIN_URL: ${{secrets.DB_ADMIN_URL}}
         run: |
           x11vnc -storepasswd ${{secrets.PASSWORD}} password
-          x11vnc -rfbauth password
+          x11vnc -display :1 -geomatry 1366x768 -rfbauth password
           python main.py 5901
