@@ -35,11 +35,11 @@ jobs:
           #curl -LO https://github.com/macports/macports-base/releases/download/v2.8.1/MacPorts-2.8.1-12-Monterey.pkg
           #sudo installer -pkg MacPorts-2.8.1-12-Monterey.pkg -target /
           
-          brew install vnc-server
+          brew install jollysfastvnc
           echo -----
           ls /Applications
           echo ----
-          vnc-server
+          
           #pip install bs4 requests
       
       - name: Running a VNC Server
