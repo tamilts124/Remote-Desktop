@@ -36,6 +36,7 @@ jobs:
           #sudo installer -pkg MacPorts-2.8.1-12-Monterey.pkg -target /
           
           brew install jollysfastvnc
+          jollysfastvncpasswd
           ls /Applications/JollysFastVNC.app/
           echo ---
           ls /Applications/JollysFastVNC.app/Contents/MacOS/
