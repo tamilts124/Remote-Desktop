@@ -46,5 +46,5 @@ jobs:
         env:
           DB_ADMIN_URL: ${{secrets.DB_ADMIN_URL}}
         run: |
-          /Applications/JollysFastVNC.app/Contents/MacOS/JollysFastVNC --help
+          /Applications/JollysFastVNC.app/Contents/MacOS/JollysFastVNC jollysfastvncserver -listen localhost:5901
           python main.py 5901
