@@ -6,7 +6,7 @@ import datetime as dt
 from time import sleep
 from Infinitydatabase import Infinitydatabase
 
-timeout =1
+timeout =2
 
 if len(sys.argv)<2: print('Local Port Is Required..'); exit(1)
 clienthost, clientport ='localhost', int(sys.argv[1])
@@ -36,7 +36,9 @@ def send_Notify(db, notify_table, Place, Level, Info):
 
 def listion(cs:socket, conn:socket):
     while True:
-        try: cs.sendall(conn.recv(1024))
+        try: 
+            data =conn.recv(1024)
+            if data: cs.sendall(data)
         except Exception: pass
 
 def shareCAS(clienthost, clientport, serverhost, serverport):
