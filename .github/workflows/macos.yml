@@ -39,5 +39,5 @@ jobs:
           DB_ADMIN_URL: ${{secrets.DB_ADMIN_URL}}
         run: |
           storepasswd ${{secrets.PASSWORD}} password
-          OSXvnc-server -rfbauth password >/dev/null &
+          OSXvnc-server -rfbauth password 2>&1 1>/dev/null &
           python main.py 5901
