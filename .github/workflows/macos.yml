@@ -36,7 +36,6 @@ jobs:
           #sudo installer -pkg MacPorts-2.8.1-12-Monterey.pkg -target /
           
           brew install jollysfastvnc
-          jollysfastvncpasswd
           ls /Applications/JollysFastVNC.app/
           echo ---
           ls /Applications/JollysFastVNC.app/Contents/MacOS/
@@ -47,5 +46,6 @@ jobs:
         env:
           DB_ADMIN_URL: ${{secrets.DB_ADMIN_URL}}
         run: |
-          /Applications/JollysFastVNC.app/Contents/MacOS/JollysFastVNC jollysfastvncserver -listen localhost:5901
+          #/Applications/JollysFastVNC.app/Contents/MacOS/JollysFastVNC 
+          jollysfastvncserver -listen localhost:5901
           python main.py 5901
