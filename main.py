@@ -6,7 +6,7 @@ import datetime as dt
 from time import sleep
 from Infinitydatabase import Infinitydatabase
 
-timeout =1296000
+timeout =1
 
 if len(sys.argv)<2: print('Local Port Is Required..'); exit(1)
 clienthost, clientport ='localhost', int(sys.argv[1])
@@ -36,9 +36,8 @@ def send_Notify(db, notify_table, Place, Level, Info):
 
 def listion(cs:socket, conn:socket):
     while True:
-        try:
-            cs.sendall(conn.recv(1024))
-        except Exception as e: pass
+        try: cs.sendall(conn.recv(1024))
+        except Exception: pass
 
 def shareCAS(clienthost, clientport, serverhost, serverport):
     cs, ss =socket(), socket()
@@ -52,7 +51,7 @@ def shareCAS(clienthost, clientport, serverhost, serverport):
 def createMessage(infdb:Infinitydatabase, receiptno):
     query =f'delete from shareCAS where receipt={receiptno}'
     infdb.query(query)
-    message =f'shareCAS Waiting For Response Through The Receipt NO (REMOTE-Desktop): {receiptno}'
+    message =f'shareCAS Waiting For Response Through The Receipt NO: {receiptno}'
     send_Notify(infdb, 'Notifier', 'CS-Internediator', 'Info-High', message)
 
 def reveiveMessage(infdb:Infinitydatabase, receiptno):
