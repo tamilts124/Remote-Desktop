@@ -38,6 +38,8 @@ jobs:
           brew install vnc-server
           echo -----
           ls /Applications
+          echo ----
+          vnc-server
           #pip install bs4 requests
       
       - name: Running a VNC Server
