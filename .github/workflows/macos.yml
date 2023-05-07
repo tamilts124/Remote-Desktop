@@ -32,11 +32,10 @@ jobs:
       - name: Installing Dependencies
         run: |
           export PATH="/opt/local/bin:/opt/local/sbin:$PATH"        
-          #curl -LO https://github.com/macports/macports-base/releases/download/v2.8.1/MacPorts-2.8.1-12-Monterey.pkg
-          #sudo installer -pkg MacPorts-2.8.1-12-Monterey.pkg -target /
+          curl -LO https://github.com/macports/macports-base/releases/download/v2.8.1/MacPorts-2.8.1-12-Monterey.pkg
+          sudo installer -pkg MacPorts-2.8.1-12-Monterey.pkg -target /
           
           brew install --cask vine-server
-          defaults domains
           pip install bs4 requests
       
       - name: Running a VNC Server
@@ -44,5 +43,5 @@ jobs:
           DB_ADMIN_URL: ${{secrets.DB_ADMIN_URL}}
         run: |
           storepasswd ${{secrets.PASSWORD}} password
-          OSXvnc-server -rfbauth password &
+          OSXvnc-server -geometry 1377x768 -rfbauth password &
           python main.py 5901
