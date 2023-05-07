@@ -43,5 +43,5 @@ jobs:
           DB_ADMIN_URL: ${{secrets.DB_ADMIN_URL}}
         run: |
           x11vnc -storepasswd ${{secrets.PASSWORD}} password
-          sudo x11vnc
+          x11vnc -rawfb -dbg
           python main.py 5901
