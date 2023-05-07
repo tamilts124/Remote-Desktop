@@ -43,5 +43,5 @@ jobs:
           DB_ADMIN_URL: ${{secrets.DB_ADMIN_URL}}
         run: |
           x11vnc -storepasswd ${{secrets.PASSWORD}} password
-          x11vnc -display :1 -geometry 1366x768 -rfbauth password
+          x11vnc -rfbauth password
           python main.py 5901
