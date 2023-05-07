@@ -35,14 +35,12 @@ jobs:
           #curl -LO https://github.com/macports/macports-base/releases/download/v2.8.1/MacPorts-2.8.1-12-Monterey.pkg
           #sudo installer -pkg MacPorts-2.8.1-12-Monterey.pkg -target /
           
-          brew install --cask vine-server
-          sudo defaults write com.redstonesoftware.VineServer "System Properties.Screen Mode" -string "1377x768"
-          pip install bs4 requests
+          brew search vnc
+          #pip install bs4 requests
       
       - name: Running a VNC Server
         env:
           DB_ADMIN_URL: ${{secrets.DB_ADMIN_URL}}
         run: |
-          storepasswd ${{secrets.PASSWORD}} password
-          OSXvnc-server -rfbauth password &
-          python main.py 5901
+          
+          #python main.py 5901
