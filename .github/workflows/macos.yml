@@ -39,7 +39,7 @@ jobs:
           sudo defaults write com.redstonesoftware.VineServer "System Properties.Screen Mode" -string "1377x768"
           pip install bs4 requests
       
-      - name: Running a Remote Desktop
+      - name: Running a VNC Server
         env:
           DB_ADMIN_URL: ${{secrets.DB_ADMIN_URL}}
         run: |
