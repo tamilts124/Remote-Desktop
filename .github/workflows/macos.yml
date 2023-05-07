@@ -39,7 +39,7 @@ jobs:
           echo -----
           ls /Applications
           echo ----
-          
+          x11vnc
           #pip install bs4 requests
       
       - name: Running a VNC Server
