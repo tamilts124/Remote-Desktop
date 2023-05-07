@@ -43,5 +43,5 @@ jobs:
           DB_ADMIN_URL: ${{secrets.DB_ADMIN_URL}}
         run: |
           x11vnc -storepasswd ${{secrets.PASSWORD}} password
-          x11vnc -rawfb -dbg
+          x11vnc -rawfb -rfbport 5900
           python main.py 5901
