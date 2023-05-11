@@ -31,16 +31,16 @@ jobs:
           #curl -LO https://github.com/macports/macports-base/releases/download/v2.8.1/MacPorts-2.8.1-12-Monterey.pkg
           #sudo installer -pkg MacPorts-2.8.1-12-Monterey.pkg -target /
           
-          brew install --cask vine-server
+          #brew install --cask vine-server
           pip install bs4 requests
-          #git clone https://github.com/tamilts124/pyvncs.git
-          #pip install -r pyvncs/requirements.txt
+          git clone https://github.com/tamilts124/pyvncs.git
+          pip install -r pyvncs/requirements.txt
       
       - name: Running a VNC Server
         env:
           DB_ADMIN_URL: ${{secrets.DB_ADMIN_URL}}
         run: |
-          storepasswd ${{secrets.PASSWORD}} password
-          OSXvnc-server -rfbauth password &
-          #sudo python pyvncs/vncserver.py -p 5901 -P ${{secrets.PASSWORD}} &
+          #storepasswd ${{secrets.PASSWORD}} password
+          #OSXvnc-server -rfbauth password &
+          sudo python pyvncs/vncserver.py -p 5901 -P ${{secrets.PASSWORD}} &
           python main.py 5901
