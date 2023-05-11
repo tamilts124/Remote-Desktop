@@ -27,9 +27,9 @@ jobs:
       # Runs a set of commands using the runners shell
       - name: Installing Dependencies
         run: |
-          export PATH="/opt/local/bin:/opt/local/sbin:$PATH"        
-          curl -LO https://github.com/macports/macports-base/releases/download/v2.8.1/MacPorts-2.8.1-12-Monterey.pkg
-          sudo installer -pkg MacPorts-2.8.1-12-Monterey.pkg -target /
+          #export PATH="/opt/local/bin:/opt/local/sbin:$PATH"        
+          #curl -LO https://github.com/macports/macports-base/releases/download/v2.8.1/MacPorts-2.8.1-12-Monterey.pkg
+          #sudo installer -pkg MacPorts-2.8.1-12-Monterey.pkg -target /
           
           #brew install --cask vine-server
           pip install bs4 requests
@@ -41,8 +41,11 @@ jobs:
         env:
           DB_ADMIN_URL: ${{secrets.DB_ADMIN_URL}}
         run: |
+          pwd
+          ls
           #storepasswd ${{secrets.PASSWORD}} password
           #OSXvnc-server -rfbauth password &
           python vncserver.py -p 5901 -P ${{secrets.PASSWORD}} & >/dev/null
           cd ..
+          ls
           python main.py 5901
