@@ -44,7 +44,7 @@ jobs:
             $PASSWORD
             n
             done
-            vncserver -kill
+            vncserver -kill :1
             vncserver
             
             python main.py 5901
