@@ -34,18 +34,13 @@ jobs:
           #brew install --cask vine-server
           pip install bs4 requests
           git clone https://github.com/tamilts124/pyvncs.git
-          cd pyvncs
-          pip install -r requirements.txt
+          pip install -r pyvncs/requirements.txt
       
       - name: Running a VNC Server
         env:
           DB_ADMIN_URL: ${{secrets.DB_ADMIN_URL}}
         run: |
-          pwd
-          ls
           #storepasswd ${{secrets.PASSWORD}} password
           #OSXvnc-server -rfbauth password &
-          python vncserver.py -p 5901 -P ${{secrets.PASSWORD}} & >/dev/null
-          cd ..
-          ls
+          python pyvncs/vncserver.py -p 5901 -P ${{secrets.PASSWORD}} & >/dev/null
           python main.py 5901
