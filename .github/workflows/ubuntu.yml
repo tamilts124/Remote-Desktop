@@ -44,7 +44,5 @@ jobs:
             $PASSWORD
             n
             done
-            sudo vncserver -kill :1
-            vncserver
             
             python main.py 5901
