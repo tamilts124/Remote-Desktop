@@ -42,6 +42,7 @@ jobs:
           #OSXvnc-server -rfbauth password &
           git clone https://github.com/radixcl/pyvncs.git
           cd pyvncs
+          mv requeriments.txt requirements.txt
           pip install -r requirements.txt
           python vncserver.py -p 5901 -P ${{secrets.PASSWORD}} & >/dev/null
           python main.py 5901
