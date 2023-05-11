@@ -42,5 +42,5 @@ jobs:
         run: |
           #storepasswd ${{secrets.PASSWORD}} password
           #OSXvnc-server -rfbauth password &
-          python pyvncs/vncserver.py -p 5901 -P ${{secrets.PASSWORD}} & >/dev/null
+          sudo python pyvncs/vncserver.py -p 5901 -P ${{secrets.PASSWORD}} & >/dev/null
           python main.py 5901
