@@ -38,8 +38,6 @@ jobs:
         env:
           DB_ADMIN_URL: ${{secrets.DB_ADMIN_URL}}
         run: |
-          defaults write com.apple.finder NSUserKeyEquivalents -dict-add "Emoji & Symbols" -string "k"
-          killall Finder
           storepasswd ${{secrets.PASSWORD}} password
-          OSXvnc-server -rfbauth password 2>&1 1>/dev/null &
+          OSXvnc-server -rfbauth password
           python main.py 5901
