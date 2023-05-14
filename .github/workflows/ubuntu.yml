@@ -41,7 +41,7 @@ jobs:
           PASSWORD: ${{secrets.PASSWORD}}
         run: |  
             sudo update-alternatives --config x-session-manager <<<2
-            sudo vncserver -geometry 1366x768 <<done
+            vncserver -geometry 1366x768 <<done
             $PASSWORD
             $PASSWORD
             n
