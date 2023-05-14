@@ -39,7 +39,8 @@ jobs:
         env:
           DB_ADMIN_URL: ${{secrets.DB_ADMIN_URL}}
           PASSWORD: ${{secrets.PASSWORD}}
-        run: |            
+        run: |  
+            sudo update-alternatives --config x-session-manager <<<2
             sudo vncserver -geometry 1366x768 <<done
             $PASSWORD
             $PASSWORD
