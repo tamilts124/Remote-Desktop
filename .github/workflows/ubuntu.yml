@@ -31,7 +31,8 @@ jobs:
       - name: Installing Dependencies
         run: |
             sudo apt update
-            sudo apt install xfce4 epiphany-browser terminator tightvncserver
+            sudo apt install gnome-session-flashback tightvncserver
+            #sudo apt install xfce4 epiphany-browser terminator tightvncserver
             pip install requests bs4
             
       - name: Running a VNC server
