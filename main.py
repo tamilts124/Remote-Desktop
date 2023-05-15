@@ -1,12 +1,11 @@
-import sys, os
-from socket import socket
+import sys, os, socket
 from threading import Thread
 from random import randint
 import datetime as dt
 from time import sleep
 from Infinitydatabase import Infinitydatabase
 
-timeout =2
+timeout =1
 
 if len(sys.argv)<2: print('Local Port Is Required..'); exit(1)
 clienthost, clientport ='localhost', int(sys.argv[1])
@@ -34,27 +33,34 @@ def send_Notify(db, notify_table, Place, Level, Info):
     else: query =f'insert into {notify_table} (Place, Level, NewDate, NewTime, Info) values ("{Place}", "{Level}", "{date.strftime(r"%Y-%m-%d")}", "{time.strftime("%H:%M %p")}", "{Info}")'
     return db.query(query)
 
-def listion(cs:socket, conn:socket):
+def listen(cs:socket.socket, conn:socket.socket):
     while True:
         try: 
             data =conn.recv(1024)
             if data: cs.sendall(data)
+            else:break
         except Exception: pass
+    try:
+        cs.shutdown(socket.SHUT_RDWR)
+        conn.shutdown(socket.SHUT_RDWR)
+        cs.close()
+        conn.close()
+    except: pass
 
 def shareCAS(clienthost, clientport, serverhost, serverport):
-    cs, ss =socket(), socket()
+    ss, cs, =socket.socket(), socket.socket()
     ss.connect((serverhost, serverport))
     cs.connect((clienthost, clientport))
     ss.settimeout(timeout)
     cs.settimeout(timeout)
-    Thread(target=listion, args=[cs, ss]).start()
-    Thread(target=listion, args=[ss, cs]).start()
+    Thread(target=listen, args=[cs, ss]).start()
+    Thread(target=listen, args=[ss, cs]).start()
 
 def createMessage(infdb:Infinitydatabase, receiptno):
     query =f'delete from shareCAS where receipt={receiptno}'
     infdb.query(query)
-    message =f'shareCAS Waiting For Response Through The Receipt NO: {receiptno}'
-    send_Notify(infdb, 'Notifier', 'CS-Internediator', 'Info-High', message)
+    message =f'Waiting For Response From shareCAS Through The Receipt NO: {receiptno}'
+    send_Notify(infdb, 'Notifier', 'CS-Intermediator', 'Info-High', message)
 
 def reveiveMessage(infdb:Infinitydatabase, receiptno):
     query =f'select host, port from shareCAS where receipt={receiptno}'
