@@ -37,8 +37,7 @@ def listen(cs:socket.socket, conn:socket.socket):
     while True:
         try: 
             data =conn.recv(1024)
-            if data: cs.sendall(data)
-            else:break
+            cs.sendall(data)
         except Exception: pass
     try:
         cs.shutdown(socket.SHUT_RDWR)
