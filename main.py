@@ -77,5 +77,7 @@ if __name__ == '__main__':
         try:
             serverhost, serverport =reveiveMessage(infdb, receiptno)
             shareCAS(clienthost, clientport, serverhost, serverport)
-        except Exception as e:
-            print(e); sleep(10)
+        except: sleep(10)
+
+
+
