@@ -5,7 +5,7 @@ import datetime as dt
 from time import sleep
 from Infinitydatabase import Infinitydatabase
 
-timeout =1
+stimeout, ctimeout =10, 1
 
 if len(sys.argv)<2: print('Local Port Is Required..'); exit(1)
 clienthost, clientport ='localhost', int(sys.argv[1])
@@ -39,19 +39,13 @@ def listen(cs:socket.socket, conn:socket.socket):
             data =conn.recv(1024)
             cs.sendall(data)
         except Exception: pass
-    try:
-        cs.shutdown(socket.SHUT_RDWR)
-        conn.shutdown(socket.SHUT_RDWR)
-        cs.close()
-        conn.close()
-    except: pass
 
 def shareCAS(clienthost, clientport, serverhost, serverport):
     ss, cs, =socket.socket(), socket.socket()
     ss.connect((serverhost, serverport))
     cs.connect((clienthost, clientport))
-    ss.settimeout(timeout)
-    cs.settimeout(timeout)
+    ss.settimeout(stimeout)
+    cs.settimeout(ctimeout)
     Thread(target=listen, args=[cs, ss]).start()
     Thread(target=listen, args=[ss, cs]).start()
 
@@ -64,13 +58,15 @@ def createMessage(infdb:Infinitydatabase, receiptno):
 def reveiveMessage(infdb:Infinitydatabase, receiptno):
     query =f'select host, port from shareCAS where receipt={receiptno}'
     while True:
-        table =infdb.query(query)
-        if table and table.get('row'):
-            host, port =table['row'][0]
-            port =int(port)
-            query =f'delete from shareCAS where receipt={receiptno}'
-            infdb.query(query)
-            return host, port
+        try:
+            table =infdb.query(query)
+            if table and table.get('row'):
+                host, port =table['row'][0]
+                port =int(port)
+                query =f'delete from shareCAS where receipt={receiptno}'
+                infdb.query(query)
+                return host, port
+        except: pass
         sleep(5)
 
 if __name__ == '__main__':
