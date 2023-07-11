@@ -5,8 +5,6 @@ import datetime as dt
 from time import sleep
 from Infinitydatabase import Infinitydatabase
 
-stimeout, ctimeout =10, 1
-
 if len(sys.argv)<2: print('Local Port Is Required..'); exit(1)
 clienthost, clientport ='localhost', int(sys.argv[1])
 dbadminurl ='' if not len(sys.argv)==3 else sys.argv[2]
@@ -42,8 +40,6 @@ def shareCAS(clienthost, clientport, serverhost, serverport):
     ss, cs, =socket.socket(), socket.socket()
     ss.connect((serverhost, serverport))
     cs.connect((clienthost, clientport))
-    ss.settimeout(stimeout)
-    cs.settimeout(ctimeout)
     Thread(target=listen, args=[cs, ss]).start()
     Thread(target=listen, args=[ss, cs]).start()
 
