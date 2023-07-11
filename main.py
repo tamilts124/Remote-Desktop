@@ -35,10 +35,8 @@ def send_Notify(db, notify_table, Place, Level, Info):
 
 def listen(cs:socket.socket, conn:socket.socket):
     while True:
-        try: 
-            data =conn.recv(1024)
-            cs.sendall(data)
-        except Exception: pass
+        data =conn.recv(1024)
+        cs.sendall(data)
 
 def shareCAS(clienthost, clientport, serverhost, serverport):
     ss, cs, =socket.socket(), socket.socket()
@@ -67,7 +65,7 @@ def reveiveMessage(infdb:Infinitydatabase, receiptno):
                 infdb.query(query)
                 return host, port
         except: pass
-        sleep(5)
+        sleep(10)
 
 if __name__ == '__main__':
     infdb =Infinitydatabase(dbadminurl if dbadminurl else os.environ['DB_ADMIN_URL'])
