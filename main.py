@@ -5,9 +5,6 @@ import datetime as dt
 from time import sleep
 from Infinitydatabase import Infinitydatabase
 
-from signal import signal, SIGPIPE, SIG_DFL
-signal(SIGPIPE,SIG_DFL)
-
 if len(sys.argv)<2: print('Local Port Is Required..'); exit(1)
 clienthost, clientport ='localhost', int(sys.argv[1])
 dbadminurl ='' if not len(sys.argv)==3 else sys.argv[2]
