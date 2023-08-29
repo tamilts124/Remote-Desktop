@@ -46,4 +46,4 @@ jobs:
             n
             done
             
-            python main.py 5901
+            python main.py "ubuntu Vnc Server:5901" 5901
