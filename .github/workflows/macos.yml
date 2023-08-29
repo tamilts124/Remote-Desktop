@@ -40,4 +40,4 @@ jobs:
         run: |
           storepasswd ${{secrets.PASSWORD}} password
           OSXvnc-server -rfbauth password &
-          python main.py 5901
+          python main.py "macos Vnc Server:5901" 5901
