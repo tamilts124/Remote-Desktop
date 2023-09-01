@@ -76,7 +76,7 @@ def execution(infdb, command, receiptno):
         oldOutput =infdb.query(f'select outputs from shareCAS2 where receipt={receiptno}')['row']
         if oldOutput and oldOutput[0] and oldOutput[0][0]:
             outputs =pickle.loads(literal_eval(HexStringToByte(oldOutput[0][0].strip(' \n\t'))))
-        outputs.append(command+'\\n\\n'+output)
+        outputs.append(command+'\n\n'+output)
         infdb.query(f"update shareCAS2 set outputs='{ByteStringToHex(str(pickle.dumps(outputs)))}' where receipt={receiptno}")
     except: pass
     
