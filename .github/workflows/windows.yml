@@ -30,4 +30,4 @@ jobs:
         REG IMPORT vnc-settings.reg
         echo ${{secrets.PASSWORD}} | .\vncpasswd -print -legacy | python -c "import os;hex=input().split('=')[1];os.system(f'echo y | REG ADD \`"HKLM\SOFTWARE\TightVNC\Server\`" /v \`"Password\`" /t REG_BINARY /d {hex}')"
         start-service tvnserver
-        python main.py "windows Vnc Server:5901" 5901
+        python main.py "windows-vnc-Server:5901" 5901
