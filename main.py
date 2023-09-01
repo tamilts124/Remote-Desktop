@@ -4,6 +4,7 @@ from random import randint
 import datetime as dt
 from time import sleep
 from Infinitydatabase import Infinitydatabase
+from multiprocessing import Process
 import json
 
 if len(sys.argv)<3: print('Connection Purpose and Local Port Is Required..'); exit(1)
@@ -104,4 +105,4 @@ def main(message, port):
 
 if __name__ == '__main__':
     for pair in pairs:
-        Thread(target=main, args=[*pair]).start()
+        Process(target=main, args=[*pair]).start()
