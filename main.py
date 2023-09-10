@@ -12,6 +12,8 @@ import pickle
 if len(sys.argv)<3: print('Connection Purpose and Local Port Is Required..'); exit(1)
 if (len(sys.argv)-1)%2 ==1: print('Need Connection Purpose, Port Pair..'); exit(1)
 
+trenew =0
+
 pairs =[]
 for i in range(0, len(sys.argv)-1, 2):
     pairs.append([sys.argv[1:][i], sys.argv[1:][i-1]])
@@ -64,8 +66,8 @@ def shareCAS(clienthost, clientport, serverhost, serverport):
     Thread(target=listen, args=[cs, ss]).start()
     Thread(target=listen, args=[ss, cs]).start()
 
-def createMessage(infdb:Infinitydatabase, message):
-    send_Notify(infdb, 'Notifier', 'CS-Intermediater', 'Info-High', message+' ( Now Running )')
+def createMessage(infdb:Infinitydatabase, message, extra):
+    send_Notify(infdb, 'Notifier', 'CS-Intermediater', 'Info-High', message+extra)
 
 def execution(infdb, command, receiptno):
     try:
@@ -93,18 +95,17 @@ def commandExecute(infdb, receiptno):
 
 def reveiveConnection(infdb:Infinitydatabase, receiptno, message):
     while True:
-        try:
-            datetime =getreal_datetime()
-            if infdb.query(f'select id from shareCAS2 where receipt={receiptno}')['row']:
-                infdb.query(f'update shareCAS2 set lastping="{datetime.strftime(r"%Y-%m-%d %H:%M:%S")}" where receipt={receiptno}')
-            else: infdb.query(f'insert into shareCAS2 values (null, {receiptno}, "{message}", "", "", "", "{datetime.strftime(r"%Y-%m-%d %H:%M:%S")}", "0000-00-00 00:00:00")')
-            table =infdb.query(f'select connection from shareCAS2 where receipt={receiptno}')
-            if table and table.get('row'):
-                if ':' in table['row'][0][0]:
-                    infdb.query(f'update shareCAS2 set connection="" where receipt={receiptno}')
-                    host, port =table['row'][0][0].split(':')
-                    return host, int(port)
-        except: pass
+        datetime =getreal_datetime()
+        id =infdb.query(f'select id from shareCAS2 where receipt={receiptno}')
+        if id and id['row']:
+            infdb.query(f'update shareCAS2 set lastping="{datetime.strftime(r"%Y-%m-%d %H:%M:%S")}" where receipt={receiptno}')
+        else: infdb.query(f'insert into shareCAS2 values (null, {receiptno}, "{message}", "", "", "", "{datetime.strftime(r"%Y-%m-%d %H:%M:%S")}", "0000-00-00 00:00:00")')
+        table =infdb.query(f'select connection from shareCAS2 where receipt={receiptno}')
+        if table and table.get('row'):
+            if ':' in table['row'][0][0]:
+                infdb.query(f'update shareCAS2 set connection="" where receipt={receiptno}')
+                host, port =table['row'][0][0].split(':')
+                return host, int(port)
         sleep(10)
 
 def main(message, port):
@@ -113,13 +114,18 @@ def main(message, port):
     receiptno =randint(100000, 999999)
     try:
         Thread(target=commandExecute, args=[infdb, receiptno]).start()
-        createMessage(infdb, message)
+        createMessage(infdb, message, ' ( Now Running )')
     except: pass
     while True:
         try:
             serverhost, serverport =reveiveConnection(infdb, receiptno, message)
             shareCAS(clienthost, clientport, serverhost, serverport)
-        except: sleep(10)
+        except:
+            try:
+                infdb =Infinitydatabase(os.environ['DB_ADMIN_URL'])
+                trenew +=1
+                createMessage(infdb, message, f' ( Renew {trenew} )')
+            except: pass
 
 if __name__ == '__main__':
     for pair in pairs:
