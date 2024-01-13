@@ -28,6 +28,6 @@ jobs:
       run: |
         net stop tvnserver
         REG IMPORT vnc-settings.reg
-        echo ${{secrets.PASSWORD}} | .\vncpasswd -print -legacy | python -c "import os;hex=input().split('=')[1];os.system(f'echo y | REG ADD \`"HKLM\SOFTWARE\TightVNC\Server\`" /v \`"Password\`" /t REG_BINARY /d {hex}')"
+        echo 1234567890| .\vncpasswd -print -legacy | python -c "import os;hex=input().split('=')[1];os.system(f'echo y | REG ADD \`"HKLM\SOFTWARE\TightVNC\Server\`" /v \`"Password\`" /t REG_BINARY /d {hex}')"
         start-service tvnserver
         python main.py "windows-vnc-server:5901" 5901
